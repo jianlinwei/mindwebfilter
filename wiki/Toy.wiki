@@ -4,5 +4,5 @@
 
 == Contents ==
 
-  * [How to compile the Toy Version].
-  * [How to compile the Blaster Version].
+  * [ToyCompile How to compile the Toy Version].
+  * [BlasterCompile How to compile the Blaster Version].
