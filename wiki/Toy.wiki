@@ -1,0 +1,7 @@
+#toy
+
+= MinD Toy version User Manual =
+
+== Contents ==
+
+  * How to compile.
