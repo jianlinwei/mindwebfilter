@@ -4,4 +4,4 @@
 
 == Contents ==
 
-  * How to compile.
+  * [How to compile the Toy Version].
