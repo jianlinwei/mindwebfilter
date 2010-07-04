@@ -1,0 +1,12 @@
+#compilingToy.
+
+= Compiling MinD Toy =
+
+==Dependencies==
+
+For compiling Toy version, you will need the following packages installed before executing _configure_ command:
+  * build-essential
+  * libz-dev
+  * libpcre3-dev
+
+
