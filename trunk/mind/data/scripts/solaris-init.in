@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# Solaris startup script for mind
+# partly based on httpd startup script
+#
+# description: A web content filtering plugin for web \
+#              proxies, developed to filter using lists of \
+#              banned phrases, MIME types, filename \
+#              extensions and PICS labelling.
+#ident	"@(#)mind  @PACKAGE_VERSION@     02/08/05 DB"
+
+# See how we were called.
+
+case "$1" in
+start)
+        if [ -f @DGBINDIR@/mind ] &&
+           [ -f @DGCONFDIR@/mind.conf ]; then
+                @DGBINDIR@/mind
+                echo "MinD started."
+        fi
+        ;;
+stop)
+        if [ -f @DGPIDDIR@/mind.pid ]; then
+                @DGBINDIR@/mind -q
+                /bin/rm -f @DGPIDDIR@/mind.pid
+                /bin/rm -f /tmp/.dguardianipc
+                echo "MinD stopped."
+        fi
+        ;;
+restart)
+        $0 stop
+        sleep 3
+        $0 start
+        ;;
+status)
+        if [ -f @DGBINDIR@/mind ]; then
+                @DGBINDIR@/mind -s
+        fi
+        ;;
+*)
+
+        echo "Usage: $0 {start|stop|restart}" >&2
+        ;;
+esac
+
+
+exit 0
