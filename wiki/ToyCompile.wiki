@@ -10,5 +10,17 @@ For compiling Toy version, you will need the following packages installed before
   * libpcre3-dev
 
 And the following package for installing clamd support:
+  * 
 
 ==Download==
+
+Get source code from Google Code repository:
+{{{
+svn checkout http://mindwebfilter.googlecode.com/svn/trunk/ mindwebfilter-read-only
+}}}
+
+==Configuring==
+For using MinD with Clam Antivirus protection just execute:
+{{{
+./configure CXXFLAGS="-O3" --enable-clamd=yes --prefix=/ --with-proxyuser=proxy --with-proxygroup=proxy
+}}}
