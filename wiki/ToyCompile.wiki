@@ -9,4 +9,6 @@ For compiling Toy version, you will need the following packages installed before
   * libz-dev
   * libpcre3-dev
 
+And the following package for installing clamd support:
 
+==Download==
