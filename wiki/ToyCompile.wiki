@@ -5,6 +5,7 @@
 ==Dependencies==
 
 For compiling Toy version, you will need the following packages installed before executing _configure_ command:
+  * pkg-config
   * build-essential
   * libz-dev
   * libpcre3-dev
