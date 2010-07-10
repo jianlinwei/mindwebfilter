@@ -22,8 +22,8 @@ svn checkout http://mindwebfilter.googlecode.com/svn/trunk/ mindwebfilter-read-o
 For using MinD with Clam Antivirus protection just execute:
 {{{
 ./configure --mandir=/usr/share/man/ --enable-clamd=yes --with-proxyuser=proxy \
---with-proxygroup=proxy --prefix=/usr --mandir=${prefix}/share/man \
---infodir=${prefix}/share/info --sysconfdir=/etc --localstatedir=/var \
+--with-proxygroup=proxy --prefix=/usr --mandir=/usr/share/man \
+--infodir=/usr/share/info --sysconfdir=/etc --localstatedir=/var \
 --enable-icap=yes --enable-commandline=yes --enable-trickledm=yes --enable-email=yes \
 --enable-ntlm=yes CXX="g++" CXXFLAGS="-O3" LDFLAGS="-Wl,-Bsymbolic-functions" \
 CPPFLAGS="" CC="cc" CFLAGS="-O3"
