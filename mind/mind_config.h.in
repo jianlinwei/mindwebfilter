@@ -3,9 +3,6 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
-/* Define to enable debug build mode */
-#undef MIND_DEBUG
-
 /* Record configure-time options */
 #undef DG_CONFIGURE_OPTIONS
 
@@ -192,6 +189,9 @@
 /* Define to 1 if you have the <zlib.h> header file. */
 #undef HAVE_ZLIB_H
 
+/* Define to enable debug build mode */
+#undef MIND_DEBUG
+
 /* Define if type "off_t" is a typedef of another type for which String
    already has a constructor */
 #undef OFFT_COLLISION
@@ -210,6 +210,9 @@
 
 /* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION

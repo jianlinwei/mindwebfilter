@@ -36,12 +36,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <netdb.h>		// for gethostby
-
+#include <stdio.h>
 
 // DEFINES
 
-#define ICAP_CONTINUE DGCS_MAX+1
-#define ICAP_NODATA DGCS_MAX+2
+#define ICAP_CONTINUE MIND_CS_MAX+1
+#define ICAP_NODATA MIND_CS_MAX+2
 
 
 // GLOBALS
@@ -103,7 +103,7 @@ int icapinstance::init(void* args)
 {
 	// always include these lists
 	if (!readStandardLists()) {
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 
 	icapurl = cv["icapurl"];  // format: icap://icapserver:1344/avscan
@@ -111,7 +111,7 @@ int icapinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Error reading icapurl option." << std::endl;
 		syslog(LOG_ERR, "Error reading icapurl option.");
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 		// it would be far better to do a test connection
 	}
 	icaphost = icapurl.after("//");
@@ -128,7 +128,7 @@ int icapinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Error resolving icap host address." << std::endl;
 		syslog(LOG_ERR, "Error resolving icap host address.");
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 	icapip = inet_ntoa(*(struct in_addr *) host->h_addr_list[0]);
 
@@ -156,7 +156,7 @@ int icapinstance::init(void* args)
 			if (!is_daemonised)
 				std::cerr << "ICAP response not 200 OK" << std::endl;
 			syslog(LOG_ERR, "ICAP response not 200 OK");
-			return DGCS_WARNING;
+			return MIND_CS_WARNING;
 			//throw std::runtime_error("Response not 200 OK");
 		}
 		while (icapsock.getLine(buff, 8192, o.content_scanner_timeout) > 0) {
@@ -187,7 +187,7 @@ int icapinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "ICAP server did not respond to OPTIONS request: " << e.what() << std::endl;
 		syslog(LOG_ERR, "ICAP server did not respond to OPTIONS request: %s", e.what());
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 #ifdef MIND_DEBUG
 	if (usepreviews)
@@ -195,7 +195,7 @@ int icapinstance::init(void* args)
 	else
 		std::cout << "Message previews disabled" << std::endl;
 #endif
-	return DGCS_OK;
+	return MIND_CS_OK;
 }
 
 // send memory buffer to ICAP server for scanning
@@ -208,7 +208,7 @@ int icapinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheader,
 
 	if (not doHeaders(icapsock, requestheader, docheader, objectsize)) {
 		icapsock.close();
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 #ifdef MIND_DEBUG
 	std::cerr << "About to send memory data to icap" << std::endl;
@@ -248,7 +248,7 @@ int icapinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheader,
 			icapsock.close();
 			lastmessage = "Exception sending message preview to ICAP";
 			syslog(LOG_ERR, "Exception sending message preview to ICAP: %s", e.what());
-			return DGCS_SCANERROR;		
+			return MIND_CS_SCANERROR;		
 		}
 	}
 	try {
@@ -273,7 +273,7 @@ int icapinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheader,
 		icapsock.close();
 		lastmessage = "Exception sending memory file to ICAP";
 		syslog(LOG_ERR, "Exception sending memory file to ICAP: %s", e.what());
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 
 	return doScan(icapsock, docheader, object, objectsize);
@@ -290,7 +290,7 @@ int icapinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 #endif
 		lastmessage = "Error opening file to send to ICAP";
 		syslog(LOG_ERR, "Error opening file to send to ICAP: %s", strerror(errno));
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	lseek(filefd, 0, SEEK_SET);
 	unsigned int filesize = lseek(filefd, 0, SEEK_END);
@@ -299,7 +299,7 @@ int icapinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 	if (not doHeaders(icapsock, requestheader, docheader, filesize)) {
 		icapsock.close();
 		close(filefd);
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 
 	lseek(filefd, 0, SEEK_SET);
@@ -364,7 +364,7 @@ int icapinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 				if (rc != ICAP_NODATA)
 					return rc;
 			}
-			return DGCS_SCANERROR;		
+			return MIND_CS_SCANERROR;		
 		}
 	}
 
@@ -416,7 +416,7 @@ int icapinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 			if (rc != ICAP_NODATA)
 				return rc;
 		}
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	close(filefd);
 	delete[] data;
@@ -505,7 +505,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 			std::cerr << "ICAP says clean!" << std::endl;
 #endif
 			delete[]data;
-			return DGCS_CLEAN;
+			return MIND_CS_CLEAN;
 		} else if (returncode == "100") {
 #ifdef MIND_DEBUG
 			std::cerr << "ICAP says continue!" << std::endl;
@@ -537,7 +537,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 #endif
 					lastvirusname = line.after("Threat=").before(";");
 					delete[]data;
-					return DGCS_INFECTED;
+					return MIND_CS_INFECTED;
 				}
 			}
 			// AVIRA's Antivir gives us 200 in all cases, so
@@ -558,7 +558,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 #endif
 					delete[] data;
 					lastvirusname = "Unknown";
-					return DGCS_INFECTED;
+					return MIND_CS_INFECTED;
 				}
 				// ok - headers were identical, so look at encapsulated body
 				// discard the rest of the encapsulated headers
@@ -584,14 +584,14 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 					std::cerr << "ICAP says clean!" << std::endl;
 #endif
 					delete[]data;
-					return DGCS_CLEAN;
+					return MIND_CS_CLEAN;
 				} else {
 #ifdef MIND_DEBUG
 					std::cerr << "ICAP says infected! (body byte comparison)" << std::endl;
 #endif
 					delete[] data;
 					lastvirusname = "Unknown";
-					return DGCS_INFECTED;
+					return MIND_CS_INFECTED;
 				}
 			}
 			// even if we don't find an X-Infection-Found header,
@@ -601,7 +601,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 #endif
 			delete[] data;
 			lastvirusname = "Unknown";
-			return DGCS_INFECTED;
+			return MIND_CS_INFECTED;
 		}
 		else if (returncode == "404") {
 #ifdef MIND_DEBUG
@@ -610,7 +610,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 			lastmessage = "ICAP reports no such service";
 			syslog(LOG_ERR, "ICAP reports no such service; check your server URL");
 			delete[]data;
-			return DGCS_SCANERROR;
+			return MIND_CS_SCANERROR;
 		} else {
 #ifdef MIND_DEBUG
 			std::cerr << "ICAP returned unrecognised response code: " << returncode << std::endl;
@@ -618,7 +618,7 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 			lastmessage = "ICAP returned unrecognised response code.";
 			syslog(LOG_ERR, "ICAP returned unrecognised response code: %s", returncode.toCharArray());
 			delete[]data;
-			return DGCS_SCANERROR;
+			return MIND_CS_SCANERROR;
 		}
 		delete[]data;
 	}
@@ -629,9 +629,9 @@ int icapinstance::doScan(Socket & icapsock, HTTPHeader * docheader, const char* 
 		lastmessage = "Exception getting reply from ICAP.";
 		syslog(LOG_ERR, "Exception getting reply from ICAP: %s", e.what());
 		delete[]data;
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	// it is generally NOT a good idea, when using virus scanning,
 	// to continue as if nothing went wrong by default!
-	return DGCS_SCANERROR;
+	return MIND_CS_SCANERROR;
 }

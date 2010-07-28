@@ -149,7 +149,7 @@ int ntlminstance::identify(Socket& peercon, Socket& proxycon, HTTPHeader &h, std
 
 			h.makePersistent();
 		}
-		return DGAUTH_NOMATCH;
+		return MIND_AUTH_NOMATCH;
 	}
 
 #ifdef MIND_DEBUG
@@ -169,7 +169,7 @@ int ntlminstance::identify(Socket& peercon, Socket& proxycon, HTTPHeader &h, std
 		h.addXForwardedFor(clientip);  // add squid-like entry
 	}
 	h.makePersistent();
-	h.out(&peercon, &proxycon, __DGHEADER_SENDALL);
+	h.out(&peercon, &proxycon, __MIND_HEADER_SENDALL);
 #ifdef MIND_DEBUG
 	std::cout << "NTLM - receiving step 2" << std::endl;
 #endif
@@ -179,7 +179,7 @@ int ntlminstance::identify(Socket& peercon, Socket& proxycon, HTTPHeader &h, std
 #ifdef MIND_DEBUG
 		std::cout << "NTLM - sending step 2" << std::endl;
 #endif
-		h.out(NULL, &peercon, __DGHEADER_SENDALL);
+		h.out(NULL, &peercon, __MIND_HEADER_SENDALL);
 		if (h.contentLength() != -1)
 			fdt.tunnel(proxycon, peercon, false, h.contentLength(), true);
 #ifdef MIND_DEBUG
@@ -249,10 +249,10 @@ int ntlminstance::identify(Socket& peercon, Socket& proxycon, HTTPHeader &h, std
 #endif
 					string = username;
 				}
-				return DGAUTH_OK;
+				return MIND_AUTH_OK;
 			}
 		}
-		return DGAUTH_NOMATCH;
+		return MIND_AUTH_NOMATCH;
 	} else {
 #ifdef MIND_DEBUG
 		for (unsigned int i = 0; i < h.header.size(); i++)
