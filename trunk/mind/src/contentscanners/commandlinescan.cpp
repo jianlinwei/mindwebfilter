@@ -35,6 +35,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <list>
+#include <stdio.h>
 
 
 // GLOBALS
@@ -100,7 +101,7 @@ int commandlineinstance::init(void* args)
 {
 	// always include these lists
 	if (!readStandardLists()) {
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 
 	// read in program name
@@ -109,7 +110,7 @@ int commandlineinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Command-line scanner: No program specified" << std::endl;
 		syslog(LOG_ERR, "Command-line scanner: No program specified");
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 
 	// split into an argument array
@@ -153,7 +154,7 @@ int commandlineinstance::init(void* args)
 			if (!is_daemonised)
 				std::cerr << "Command-line scanner: Could not compile regular expression for extracting virus names" << std::endl;
 			syslog(LOG_ERR, "Command-line scanner: Could not compile regular expression for extracting virus names");
-			return DGCS_ERROR;
+			return MIND_CS_ERROR;
 		}
 		String ssubmatch(cv["submatch"]);
 		if (ssubmatch.length())
@@ -207,7 +208,7 @@ int commandlineinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Command-line scanner requires some mechanism for interpreting results. Please define cleancodes, infectedcodes, and/or a virusregexp." << std::endl;
 		syslog(LOG_ERR,"Command-line scanner requires some mechanism for interpreting results. Please define cleancodes, infectedcodes, and/or a virusregexp.");
-		return DGCS_ERROR;
+		return MIND_CS_ERROR;
 	}
 
 	// Copy return code lists out into static arrays
@@ -233,11 +234,11 @@ int commandlineinstance::init(void* args)
 			if (!is_daemonised)
 				std::cerr << "Command-line scanner: Default result value not understood" << std::endl;
 			syslog(LOG_ERR,"Command-line scanner: Default result value not understood");
-			return DGCS_WARNING;
+			return MIND_CS_WARNING;
 		}
 	}
 
-	return DGCS_OK;
+	return MIND_CS_OK;
 }
 
 
@@ -254,12 +255,12 @@ int commandlineinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * doche
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, scannerstdout) == -1) {
 		lastmessage = "Cannot create sockets for communicating with scanner";
 		syslog(LOG_ERR, "Cannot open socket pair for command-line scanner's stdout: %s", strerror(errno));
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	if (socketpair(AF_UNIX, SOCK_STREAM, 0, scannerstderr) == -1) {
 		lastmessage = "Cannot create sockets for communicating with scanner";
 		syslog(LOG_ERR, "Cannot open socket pair for command-line scanner's stderr: %s", strerror(errno));
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	int f = fork();
 	if (f == 0) {
@@ -281,7 +282,7 @@ int commandlineinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * doche
 	} else if (f == -1) {
 		lastmessage = "Cannot launch scanner";
 		syslog(LOG_ERR, "Cannot fork to launch command-line scanner (command \"%s %s\"): %s", progname.toCharArray(), filename, strerror(errno));
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 
 	// close write ends of sockets
@@ -316,7 +317,7 @@ int commandlineinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * doche
 	if (waitpid(f,&returncode,0) == -1) {
 		lastmessage = "Cannot get scanner return code";
 		syslog(LOG_ERR, "Cannot get command-line scanner return code: %s", strerror(errno));
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 	returncode = WEXITSTATUS(returncode);
 	
@@ -326,7 +327,7 @@ int commandlineinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * doche
 	if (returncode == 255) {
 		lastmessage = "Cannot get scanner return code";
 		syslog(LOG_ERR, "Cannot get command-line scanner return code: scanner exec failed");
-		return DGCS_SCANERROR;
+		return MIND_CS_SCANERROR;
 	}
 
 	lastvirusname = "Unknown";
@@ -335,28 +336,28 @@ int commandlineinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * doche
 		virusregexp.match(result.c_str());
 		if (virusregexp.matched()) {
 			lastvirusname = virusregexp.result(submatch);
-			return DGCS_INFECTED;
+			return MIND_CS_INFECTED;
 		}
 	}
 
 	if (cleancodes) {
 		for (int i = 0; i < numcleancodes; i++) {
 			if (returncode == cleancodes[i])
-				return DGCS_CLEAN;
+				return MIND_CS_CLEAN;
 		}
 	}
 
 	if (infectedcodes) {
 		for (int i = 0; i < numinfectedcodes; i++) {
 			if (returncode == infectedcodes[i])
-				return DGCS_INFECTED;
+				return MIND_CS_INFECTED;
 		}
 	}
 
 	if (defaultresult == 1)
-		return DGCS_CLEAN;
+		return MIND_CS_CLEAN;
 	else if (defaultresult == 0)
-		return DGCS_INFECTED;
+		return MIND_CS_INFECTED;
 
-	return DGCS_SCANERROR;
+	return MIND_CS_SCANERROR;
 }

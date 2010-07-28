@@ -41,14 +41,14 @@
 
 #define MIND_CS_NOSCAN 0
 #define MIND_CS_NEEDSCAN 1
-#define DGCS_TESTERROR -1
+#define MIND_CS_TESTERROR -1
 
 
 #define MIND_CS_CLEAN 0
 #define MIND_CS_SCANERROR -1
 #define MIND_CS_INFECTED 1
-//#define DGCS_CURED 2  // not used
-#define DGCS_MAX 4 // use values above this for custom return codes
+//#define MIND_CS_CURED 2  // not used
+#define MIND_CS_MAX 4 // use values above this for custom return codes
 
 
 // DECLARATIONS
