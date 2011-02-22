@@ -159,11 +159,11 @@ void Logger::writeToLog(const int code, const char *message, ...) {
             (code < 0 && this->internalLogfilemask & 16) ||
             (code > 0 && this->internalLogfilemask & 32)) {
         if (code == 0) {
-            vsyslog(LOG_INFO, message, arglist);
+            syslog(LOG_INFO, message, arglist);
         } else if (code < 0) {
-            vsyslog(LOG_WARNING, message, arglist);
+            syslog(LOG_WARNING, message, arglist);
         } else if (code > 0)
-            vsyslog(LOG_ERR, message, arglist);
+            syslog(LOG_ERR, message, arglist);
     }
 
     if ((code == 0 && this->internalLogfilemask & 64) ||
