@@ -3,9 +3,6 @@
 /* Define if building universal (internal helper macro) */
 #undef AC_APPLE_UNIVERSAL_BUILD
 
-/* Record configure-time options */
-#undef DG_CONFIGURE_OPTIONS
-
 /* Define to enable ClamD content scanner */
 #undef ENABLE_CLAMD
 
@@ -188,6 +185,9 @@
 
 /* Define to 1 if you have the <zlib.h> header file. */
 #undef HAVE_ZLIB_H
+
+/* Record configure-time options */
+#undef MIND_CONFIGURE_OPTIONS
 
 /* Define to enable debug build mode */
 #undef MIND_DEBUG

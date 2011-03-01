@@ -776,7 +776,9 @@ void HTTPHeader::modifyClientHeader(bool allowpersistent) {
     if (o.forceGoogleSafeSearch && (phost->startsWith("Host: www.google.") || phost->startsWith("Host: google.")))
     {
         if (header.front().after("//").after("/").startsWith("search?")
-                || header.front().after("//").after("/").startsWith("images?"))
+                || header.front().after("//").after("/").startsWith("images?")
+                || header.front().after("/").startsWith("search?")
+                || header.front().after("/").startsWith("images?"))
         {
            header.front() = header.front().before(" HTTP/1.0")+"&safe=on HTTP/1.0";
         }

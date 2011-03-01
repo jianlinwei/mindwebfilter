@@ -101,7 +101,7 @@ CSPlugin *clamavcreate(ConfigVar & definition)
 int clamavinstance::quit()
 {
 	cl_free(root);
-	return MIND_CS_OK;
+	return DGCS_OK;
 }
 
 // does the given request need virus scanning?
@@ -152,7 +152,7 @@ int clamavinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheade
 		std::cerr << "ClamAV plugin error during buffer store creation: " << fname << ", " << strerror(errno) << std::endl;
 #endif
 		syslog(LOG_ERR, "ClamAV plugin error during buffer store creation: %s, %s", fname.c_str(), strerror(errno));
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 
 	int rc = write(fd, object, objectsize);
@@ -161,7 +161,7 @@ int clamavinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheade
 		std::cerr << "ClamAV plugin error during write: " << strerror(errno) << std::endl;
 #endif
 		syslog(LOG_ERR, "ClamAV plugin error during write: %s", strerror(errno));
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 
 	rc = cl_scandesc(fd, &vn, NULL, root, &limits, CL_SCAN_STDOPT);
@@ -179,7 +179,7 @@ int clamavinstance::scanMemory(HTTPHeader * requestheader, HTTPHeader * docheade
 		std::cerr << "ClamAV plugin error during unlink: " << strerror(errno) << std::endl;
 #endif
 		syslog(LOG_ERR, "ClamAV plugin error during unlink: %s", strerror(errno));
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	return doRC(rc, vn);
 }
@@ -201,7 +201,7 @@ int clamavinstance::doRC(int rc, const char *vn)
 #ifdef MIND_DEBUG
 		std::cerr << "INFECTED! with: " << lastvirusname << std::endl;
 #endif
-		return MIND_CS_INFECTED;
+		return DGCS_INFECTED;
 	}
 	else if (rc != CL_CLEAN) {
 		lastmessage = cl_strerror(rc);
@@ -209,12 +209,12 @@ int clamavinstance::doRC(int rc, const char *vn)
 		std::cerr << "ClamAV error: " << lastmessage << std::endl;
 #endif
 		syslog(LOG_ERR, "ClamAV error: %s", lastmessage.toCharArray());
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 #ifdef MIND_DEBUG
 	std::cerr << "ClamAV - he say yes (clean)" << std::endl;
 #endif
-	return MIND_CS_CLEAN;
+	return DGCS_CLEAN;
 }
 
 // initialise libclamav
@@ -222,7 +222,7 @@ int clamavinstance::init(void* args)
 {
 	// always include these lists
 	if (!readStandardLists()) {
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 	}
 
 	// pick method for storing memory buffers
@@ -241,7 +241,7 @@ int clamavinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Unsupported scanbuffmethod: " << smethod << std::endl;
 		syslog(LOG_ERR, "Unsupported scanbuffmethod: %s", smethod.toCharArray());
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 	}
 
 	// set clam's own temp dir
@@ -275,14 +275,14 @@ int clamavinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Error loading clamav db: " << cl_strerror(rc) << std::endl;
 		syslog(LOG_ERR, "Error loading clamav db: %s", cl_strerror(rc));
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 	}
 	rc = cl_build(root);
 	if (rc != 0) {
 		if (!is_daemonised)
 			std::cerr << "Error building clamav db: " << cl_strerror(rc) << std::endl;
 		syslog(LOG_ERR, "Error building clamav db: %s", cl_strerror(rc));
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 	}
-	return MIND_CS_OK;
+	return DGCS_OK;
 }
