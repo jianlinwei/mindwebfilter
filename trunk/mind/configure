@@ -7509,7 +7509,7 @@ fi
 
 
 cat >>confdefs.h <<_ACEOF
-#define DG_CONFIGURE_OPTIONS "$ac_configure_args"
+#define MIND_CONFIGURE_OPTIONS "$ac_configure_args"
 _ACEOF
 
 

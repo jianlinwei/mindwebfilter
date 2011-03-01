@@ -1,124 +1,6 @@
 # MinD config file for version @PACKAGE_VERSION@
 
-# **NOTE** as MinD Toy Version is a fork of Dansguardian version 2.10.1.1 
-# this file is compatible with the dansguardian.conf 
-# Please keep in mind that MinD has some new keys and some DG keys are 
-# obsolete for MinD.
-
-# Internal Log file by message type.
-# 
-# Internal MinD log (mind.log):
-# INFO:      1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 1
-# WARNING:   2  0 0 0 0  0 0 0 0  0 0 0 0  0 0 1 0
-# ERROR:     4  0 0 0 0  0 0 0 0  0 0 0 0  0 1 0 0
-# Operating System Log (syslog):
-# INFO:      8  0 0 0 0  0 0 0 0  0 0 0 0  1 0 0 0
-# WARNING:  16  0 0 0 0  0 0 0 0  0 0 0 1  0 0 0 0
-# ERROR:    32  0 0 0 0  0 0 0 0  0 0 1 0  0 0 0 0
-# Estandard output for error (stderr)
-# INFO:     64  0 0 0 0  0 0 0 0  0 1 0 0  0 0 0 0
-# WARNING: 128  0 0 0 0  0 0 0 0  1 0 0 0  0 0 0 0
-# ERROR:   256  0 0 0 0  0 0 0 1  0 0 0 0  0 0 0 0
-#
-# Default value: 511 (Write everything to anyplace)
-# Note: keep in mind that this configuration is readed after
-#       MinD has done several things, So if an error occurs while
-#       loading it's possible to see some messages at syslog or
-#       stderr even when you don't have configured this option.
-# Important: 0 value will be ignored, use 512 value to blank 
-#            all bits (Silent mode).
-internallogfilemask=7
-
-
-# Acces Log Fiel Separator
-# String for separating access.log fields, it supports C stile characters like \
-t, \n, etc.
-# Default value: \t
-accesslogfielseparator = \t
-
-
-# Access Log Line Ending character.
-# String for ending access log lines. it supports C stile characters like \t, \n, etc. 
-# Default value: \n
-accesslogendline = \n
-
-
-# Access Log Field Mask:
-# Field selection:
-# Time                    1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 1
-# UserIP                  2  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 1 0
-# Username                4  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 1 0 0
-# ProfileName             8  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  1 0 0 0
-# UserHost               16  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 1  0 0 0 0
-# UserAgent              32  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 1 0  0 0 0 0
-# URL                    64  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 1 0 0  0 0 0 0
-# Port                  128  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  1 0 0 0  0 0 0 0
-# HTTPMethod            256  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 1  0 0 0 0  0 0 0 0
-# Size                  512  0 0 0 0  0 0 0 0  0 0 0 0  0 0 1 0  0 0 0 0  0 0 0 0
-# StatusCode           1024  0 0 0 0  0 0 0 0  0 0 0 0  0 1 0 0  0 0 0 0  0 0 0 0
-# MimeType             2048  0 0 0 0  0 0 0 0  0 0 0 0  1 0 0 0  0 0 0 0  0 0 0 0
-# Action               4096  0 0 0 0  0 0 0 0  0 0 0 1  0 0 0 0  0 0 0 0  0 0 0 0
-# Reason               8192  0 0 0 0  0 0 0 0  0 0 1 0  0 0 0 0  0 0 0 0  0 0 0 0
-# Weight              16384  0 0 0 0  0 0 0 0  0 1 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# Category            32768  0 0 0 0  0 0 0 0  1 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# IsAnException       65536  0 0 0 0  0 0 0 1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# WasScanned         131072  0 0 0 0  0 0 1 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# IsInfected         262144  0 0 0 0  0 1 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# ContentModified    524288  0 0 0 0  1 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# UrlModified       1048576  0 0 0 1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# HeaderModified    2097152  0 0 1 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# BlockeableContent 4194304  0 1 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# 
-# Default value: 8388575 (All but user-agent)
-# NOTE: 0 or missing key will be configure the default value.
-accesslogfieldmask = 8388575
-
-
-# Flush Logs Immediately
-# For performance reasons, the default value is off.
-flushlogsimmediately = off
-
-
-# Filter work mode:
-# 0 - Simple Proxy:  No other proxy is requered (recommended)
-#                    Usefull for transparent proxy.
-# 1 - Chained proxy: Like Dansguardian proxy. It also
-#                    needs another parent proxy.
-# 2 - ICAP mode:     Acts as an ICAP server.
-#
-# Default: 0 (Simple proxy).
-filterworkmode = 0
-
-
-# Blocking Page Style
-# 0 - Dansguardian Standard Placeholders Style 
-#     (like -URL-, -REASONGIVEN-, etc.)
-# 1 - Dansguardian Commented Placeholders Style 
-#     (like <!--URL-->, <!--REASONGIVEN-->, etc.)
-# 2 - OOP Placeholders Style 
-#     (like mind.siteURL(), mind.reasonGiven(), etc.)
-# Default: 0 (Mind Style).
-#
-blockingpagephstyle = 1
-
-
-# Transparent Proxy
-#
-# WARNING: This key may produce a lot of failures while loading pages
-#          if you activate this key and then navigates through the proxy
-#          as explicit proxy. Moreover, it highly improves performace.
-#
-# Default: off
-transparentproxy = off
-
-
-# Force to Google make safe seraches
-#
-# Forces google.com search engine to activate the safe search option
-# even when this is deactivated by manualy.
-#
-#forcegooglesafesearch = off
-forcegooglesafesearch=on
+# **NOTE** as of version 2.7.5 most of the list files are now in mindf1.conf
 
 
 # Web Access Denied Reporting (does not affect logging)
@@ -146,7 +28,7 @@ language = 'ukenglish'
 # Logging Settings
 #
 # 0 = none  1 = just denied  2 = all text based  3 = all requests
-loglevel = 3
+loglevel = 2
 
 # Log Exception Hits
 # Log if an exception (user, ip, URL, phrase) is matched and so
@@ -157,6 +39,41 @@ loglevel = 3
 # 2 = always log & mark exceptions (default)
 logexceptionhits = 2
 
+# Log File Format
+# 1 = MinD format (space delimited)
+# 2 = CSV-style format
+# 3 = Squid Log File Format
+# 4 = Tab delimited
+logfileformat = 1
+
+# truncate large items in log lines
+#maxlogitemlength = 400
+
+# anonymize logs (blank out usernames & IPs)
+#anonymizelogs = on
+
+
+# Syslog logging
+#
+# Use syslog for access logging instead of logging to the file
+# at the defined or built-in "loglocation"
+#syslog = on
+
+# Log file location
+# 
+# Defines the log directory and filename.
+#loglocation = '@DGLOGLOCATION@/access.log'
+
+
+# Statistics log file location
+#
+# Defines the stat file directory and filename.
+# Only used in conjunction with maxips > 0
+# Once every 3 minutes, the current number of IPs in the cache, and the most
+# that have been in the cache since the daemon was started, are written to this
+# file. IPs persist in the cache for 7 days.
+#statlocation = '@DGLOGLOCATION@/stats'
+
 
 # Network Settings
 # 
@@ -165,25 +82,16 @@ logexceptionhits = 2
 # Normally you would have your firewall protecting this, but if you want
 # you can limit it to a certain IP. To bind to multiple interfaces,
 # specify each IP on an individual filterip line.
-# filterip =
+filterip =
 
-
-# Filter Port
-# The port that MinD listens to.
+# the port that MinD listens to.
 filterport = 8080
 
-
-# Proxy IP
-# The ip of the proxy (default is the loopback - i.e. this server)
-# This value is ignored when using "Simle proxy" Workmode.
+# the ip of the proxy (default is the loopback - i.e. this server)
 proxyip = 127.0.0.1
 
-
-# Chained Proxy Port
-# This value is ignored when using "Simle proxy" Workmode.
-# The port MinD connects to proxy on
+# the port MinD connects to proxy on
 proxyport = 3128
-
 
 # Whether to retrieve the original destination IP in transparent proxy
 # setups and check it against the domain pulled from the HTTP headers.
@@ -199,8 +107,6 @@ proxyport = 3128
 # on (default) | off
 @ORIGIPSUPPORT@originalip = on
 
-
-# Access Denied Address
 # accessdeniedaddress is the address of your web server to which the cgi
 # mind reporting script was copied. Only used in reporting levels 1 and 2.
 #
@@ -215,7 +121,6 @@ proxyport = 3128
 #
 accessdeniedaddress = 'http://YOURSERVER.YOURDOMAIN/cgi-bin/mind.pl'
 
-
 # Non standard delimiter (only used with accessdeniedaddress)
 # To help preserve the full banned URL, including parameters, the variables
 # passed into the access denied CGI are separated using non-standard
@@ -226,6 +131,7 @@ accessdeniedaddress = 'http://YOURSERVER.YOURDOMAIN/cgi-bin/mind.pl'
 nonstandarddelimiter = on
 
 
+
 # Banned image replacement
 # Images that are banned due to domain/url/etc reasons including those
 # in the adverts blacklists can be replaced by an image.  This will,
@@ -234,6 +140,7 @@ nonstandarddelimiter = on
 # on (default) | off
 usecustombannedimage = on
 custombannedimagefile = '@DGDATADIR@/transparent1x1.gif'
+
 
 
 # Filter groups options
@@ -248,9 +155,11 @@ filtergroups = 1
 filtergroupslist = '@DGCONFDIR@/lists/filtergroupslist'
 
 
+
 # Authentication files location
 bannediplist = '@DGCONFDIR@/lists/bannediplist'
 exceptioniplist = '@DGCONFDIR@/lists/exceptioniplist'
+
 
 
 # Show weighted phrases found
@@ -258,7 +167,6 @@ exceptioniplist = '@DGCONFDIR@/lists/exceptioniplist'
 # the naughtyness limit will be logged and, if the reporting level is
 # high enough, reported. on | off
 showweightedfound = on
-
 
 # Weighted phrase mode
 # There are 3 possible modes of operation:
@@ -269,7 +177,7 @@ showweightedfound = on
 weightedphrasemode = 2
 
 
-# URL Cache Size
+
 # Positive (clean) result caching for URLs
 # Caches good pages so they don't need to be scanned again.
 # It also works with AV plugins.
@@ -278,16 +186,14 @@ weightedphrasemode = 2
 # 5000 = suggested max upper limit
 # If you're using an AV plugin then use at least 5000.
 urlcachenumber = 1000
-
-
-# URL Cache Age
+#
 # Age before they are stale and should be ignored in seconds
 # 0 = never
 # 900 = recommended = 15 mins
 urlcacheage = 900
 
 
-# Scan Clean Cache
+
 # Clean cache for content (AV) scan results
 # By default, to save CPU, files scanned and found to be
 # clean are inserted into the clean cache and NOT scanned
@@ -297,7 +203,7 @@ urlcacheage = 900
 scancleancache = on
 
 
-# Phrase Filter Mode
+
 # Smart, Raw and Meta/Title phrase content filtering options
 # Smart is where the multiple spaces and HTML are removed before phrase filtering
 # Raw is where the raw HTML including meta tags are phrase filtered
@@ -309,8 +215,6 @@ scancleancache = on
 # 3 = meta/title
 phrasefiltermode = 2
 
-
-# Preserve Case
 # Lower casing options
 # When a document is scanned the uppercase letters are converted to lower case
 # in order to compare them with the phrases.  However this can break Big5 and
@@ -319,6 +223,8 @@ phrasefiltermode = 2
 # 0 = force lower case (default)
 # 1 = do not change case
 # 2 = scan first in lower case, then in original case
+preservecase = 0
+
 # Note:
 # If phrasefiltermode and preserve case are both 2, this equates to 4 phrase
 # filtering passes. If you have a large enough userbase for this to be a
@@ -326,7 +232,7 @@ phrasefiltermode = 2
 # better to run two instances on separate servers: one with preservecase 1
 # (and possibly forcequicksearch 1) and non ASCII/UTF-8 phrase lists, and one
 # with preservecase 0 and ASCII/UTF-8 lists.
-preservecase = 2
+
 
 
 # Hex decoding options
@@ -338,6 +244,7 @@ preservecase = 2
 hexdecodecontent = off
 
 
+
 # Force Quick Search rather than DFA search algorithm
 # The current DFA implementation is not totally 16-bit character compatible
 # but is used by default as it handles large phrase lists much faster.
@@ -345,6 +252,7 @@ hexdecodecontent = off
 # enable this option.
 # off (default) | on (Big5 compatible)
 forcequicksearch = off
+
 
 
 # Reverse lookups for banned site and URLs.
@@ -355,6 +263,7 @@ forcequicksearch = off
 # DNS server, leave it off and use the Blanket IP Block option in the
 # bannedsitelist file instead.
 reverseaddresslookups = off
+
 
 
 # Reverse lookups for banned and exception IP lists.
@@ -387,6 +296,7 @@ logclienthostnames = off
 createlistcachefiles = on
 
 
+
 # POST protection (web upload and forms)
 # does not block forms without any file upload, i.e. this is just for
 # blocking or limiting uploads
@@ -394,7 +304,10 @@ createlistcachefiles = on
 # use 0 for a complete block
 # use higher (e.g. 512 = 512Kbytes) for limiting
 # use -1 for no blocking
+#maxuploadsize = 512
+#maxuploadsize = 0
 maxuploadsize = -1
+
 
 
 # Max content filter size
@@ -409,6 +322,7 @@ maxuploadsize = -1
 maxcontentfiltersize = 256
 
 
+
 # Max content ram cache scan size
 # This is only used if you use a content scanner plugin such as AV
 # This is the max size of file that DG will download and cache
@@ -417,7 +331,8 @@ maxcontentfiltersize = 256
 # The size is in Kibibytes - eg 10240 = 10Mb
 # use 0 to set it to maxcontentfilecachescansize
 # This option may be ignored by the configured download manager.
-maxcontentramcachescansize = 0
+maxcontentramcachescansize = 2000
+
 
 
 # Max content file cache scan size
@@ -426,13 +341,15 @@ maxcontentramcachescansize = 0
 # so that it can be scanned or virus checked.
 # This value must be greater or equal to maxcontentramcachescansize.
 # The size is in Kibibytes - eg 10240 = 10Mb
-maxcontentfilecachescansize = 2048
+maxcontentfilecachescansize = 20000
+
 
 
 # File cache dir
 # Where DG will download files to be scanned if too large for the
 # RAM cache.
 filecachedir = '/tmp'
+
 
 
 # Delete file cache after user completes download
@@ -445,6 +362,7 @@ filecachedir = '/tmp'
 deletedownloadedtempfiles = on
 
 
+
 # Initial Trickle delay
 # This is the number of seconds a browser connection is left waiting
 # before first being sent *something* to keep it alive.  The
@@ -455,12 +373,14 @@ deletedownloadedtempfiles = on
 initialtrickledelay = 20
 
 
+
 # Trickle delay
 # This is the number of seconds a browser connection is left waiting
 # before being sent more *something* to keep it alive.  The
 # *something* depends on the download manager chosen.
 # This may be ignored by the configured download manager.
 trickledelay = 10
+
 
 
 # Download Managers
@@ -495,6 +415,7 @@ trickledelay = 10
 downloadmanager = '@DGCONFDIR@/downloadmanagers/default.conf'
 
 
+
 # Content Scanners (Also known as AV scanners)
 # These are plugins that scan the content of all files your browser fetches
 # for example to AV scan.  The options are limitless.  Eventually all of
@@ -513,12 +434,14 @@ downloadmanager = '@DGCONFDIR@/downloadmanagers/default.conf'
 #@COMMANDLINESUPPORT@contentscanner = '@DGCONFDIR@/contentscanners/commandlinescan.conf'
 
 
+
 # Content scanner timeout
 # Some of the content scanners support using a timeout value to stop
 # processing (eg AV scanning) the file if it takes too long.
 # If supported this will be used.
 # The default of 60 seconds is probably reasonable.
 contentscannertimeout = 60
+
 
 
 # Content scan exceptions
@@ -528,6 +451,7 @@ contentscannertimeout = 60
 # Correct use of grey lists are a better idea.
 # (on|off) default = off
 contentscanexceptions = off
+
 
 
 # Auth plugins
@@ -550,6 +474,7 @@ contentscanexceptions = off
 #authplugin = '@DGCONFDIR@/authplugins/ip.conf'
 
 
+
 # Re-check replaced URLs
 # As a matter of course, URLs undergo regular expression search/replace (urlregexplist)
 # *after* checking the exception site/URL/regexpURL lists, but *before* checking against
@@ -563,12 +488,8 @@ recheckreplacedurls = off
 
 
 
-#################
-# Misc settings #
-#################
+# Misc settings
 
-
-# Forwarded For
 # if on it adds an X-Forwarded-For: <clientip> to the HTTP request
 # header.  This may help solve some problem sites that need to know the
 # source ip. on | off
@@ -588,29 +509,23 @@ logconnectionhandlingerrors = on
 
 
 
-#####################
-# Fork pool options #
-#####################
+# Fork pool options
 
-
-# Log Child Process Handling
 # If on, this causes DG to write to the log file whenever child processes are
 # created or destroyed (other than by crashes). This information can help in
 # understanding and tuning the following parameters, but is not generally
 # useful in production.
 logchildprocesshandling = off
 
-
-# Max Children
 # sets the maximum number of processes to spawn to handle the incoming
 # connections.  Max value usually 250 depending on OS.
 # On large sites you might want to try 180.
-maxchildren = 80
+maxchildren = 120
 
 
 # sets the minimum number of processes to spawn to handle the incoming connections.
-# On large sites you might want to try 64.
-minchildren = 32
+# On large sites you might want to try 32.
+minchildren = 8
 
 
 # sets the minimum number of processes to be kept ready to handle connections.
@@ -619,8 +534,8 @@ minsparechildren = 4
 
 
 # sets the minimum number of processes to spawn when it runs out
-# On large sites you might want to try 20.
-preforkchildren = 10
+# On large sites you might want to try 10.
+preforkchildren = 6
 
 
 # sets the maximum number of processes to have doing nothing.
@@ -632,13 +547,14 @@ maxsparechildren = 32
 # sets the maximum age of a child process before it croaks it.
 # This is the number of connections they handle before exiting.
 # On large sites you might want to try 10000.
-maxagechildren = 1000
+maxagechildren = 500
 
 
 # Sets the maximum number client IP addresses allowed to connect at once.
 # Use this to set a hard limit on the number of users allowed to concurrently
 # browse the web. Set to 0 for no limit, and to disable the IP cache process.
 maxips = 0
+
 
 
 # Process options
@@ -701,4 +617,9 @@ loguseragent = off
 # This is not to be confused with the -g run time option - they are not related.
 # on|off (defaults to off)
 softrestart = off
+
+# Mail program
+# Path (sendmail-compatible) email program, with options.
+# Not used if usesmtp is disabled (filtergroup specific).
+@EMAILSUPPORT@mailer = '/usr/sbin/sendmail -t'
 

@@ -618,7 +618,7 @@ fi],
 ])
 AC_SUBST(EMAILSUPPORT)
 
-AC_DEFINE_UNQUOTED([DG_CONFIGURE_OPTIONS], ["$ac_configure_args"], [Record configure-time options])
+AC_DEFINE_UNQUOTED([MIND_CONFIGURE_OPTIONS], ["$ac_configure_args"], [Record configure-time options])
 
 libdir="${libdir}/${PACKAGE_NAME}"
 

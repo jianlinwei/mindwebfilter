@@ -75,7 +75,7 @@ int kavdinstance::init(void* args)
 {
 	// always include these lists
 	if (!readStandardLists()) {
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 	}
 
 	udspath = cv["kavdudsfile"];
@@ -83,7 +83,7 @@ int kavdinstance::init(void* args)
 		if (!is_daemonised)
 			std::cerr << "Error reading kavdudsfile option." << std::endl;
 		syslog(LOG_ERR, "%s", "Error reading kavdudsfile option.");
-		return MIND_CS_ERROR;
+		return DGCS_ERROR;
 		// it would be far better to do a test connection to the file but
 		// could not be arsed for now
 	}
@@ -91,7 +91,7 @@ int kavdinstance::init(void* args)
 	// read in path prefix
 	pathprefix = cv["pathprefix"];
 
-	return MIND_CS_OK;
+	return DGCS_OK;
 }
 
 
@@ -111,7 +111,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 	// chmod can error with EINTR, ignore this?
 	if (chmod(filename, S_IRGRP|S_IRUSR) != 0) {
 		syslog(LOG_ERR, "Could not change file ownership to give kavd read access: %s", strerror(errno));
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	};
 	String command("SCAN bPQRSTUW ");
 	if (pathprefix.length()) {
@@ -127,12 +127,12 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 	UDSocket stripedsocks;
 	if (stripedsocks.getFD() < 0) {
 		syslog(LOG_ERR, "%s", "Error creating socket for talking to kavdscan");
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	if (stripedsocks.connect(udspath.toCharArray()) < 0) {
 		syslog(LOG_ERR, "%s", "Error connecting to kavdscan socket");
 		stripedsocks.close();
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	char *buff = new char[4096];
 	memset(buff, 0, 4096);
@@ -146,7 +146,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 		delete[]buff;
 		stripedsocks.close();
 		syslog(LOG_ERR, "%s", "kavdscan did not return ok");
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	try {
 		stripedsocks.writeString(command.toCharArray());
@@ -155,7 +155,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 		delete[]buff;
 		stripedsocks.close();
 		syslog(LOG_ERR, "%s", "unable to write to kavdscan");
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	try {
 		rc = stripedsocks.getLine(buff, 4096, o.content_scanner_timeout);
@@ -164,7 +164,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 		delete[]buff;
 		stripedsocks.close();
 		syslog(LOG_ERR, "%s", "Error reading kavdscan socket");
-		return MIND_CS_SCANERROR;
+		return DGCS_SCANERROR;
 	}
 	String reply(buff);
 #ifdef MIND_DEBUG
@@ -176,7 +176,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 #endif
 		delete[]buff;
 		stripedsocks.close();
-		return MIND_CS_CLEAN;
+		return DGCS_CLEAN;
 	}
 	if (reply.startsWith("322")) {	// infected
 		// patch to handle multiple virii in kavd response
@@ -191,7 +191,7 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 				delete[]buff;
 				stripedsocks.close();
 				syslog(LOG_ERR, "%s", "Error reading kavdscan socket");
-				return MIND_CS_SCANERROR;
+				return DGCS_SCANERROR;
 			}
 			reply = buff;
 #ifdef MIND_DEBUG
@@ -202,11 +202,11 @@ int kavdinstance::scanFile(HTTPHeader * requestheader, HTTPHeader * docheader, c
 		delete[]buff;
 		stripedsocks.close();
 		// format: 322 nastyvirus blah
-		return MIND_CS_INFECTED;
+		return DGCS_INFECTED;
 	}
 	delete[]buff;
 	stripedsocks.close();
 	// must be an error then
 	lastmessage = reply;
-	return MIND_CS_SCANERROR;
+	return DGCS_SCANERROR;
 }
