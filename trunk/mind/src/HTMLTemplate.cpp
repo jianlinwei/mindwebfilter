@@ -97,10 +97,12 @@ HTMLTemplate::HTMLTemplate() {
 }
 
 HTMLTemplate::~HTMLTemplate() {
+    placeholdersList *placeHoldersMap_aux;
     if (placeHoldersMap) {
         do {
+            placeHoldersMap_aux = placeHoldersMap->next;
             free(placeHoldersMap);
-        } while (placeHoldersMap = placeHoldersMap->next);
+        } while (placeHoldersMap = placeHoldersMap_aux);
     }
 }
 
