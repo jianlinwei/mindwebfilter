@@ -6,3 +6,4 @@
 
   * [ToyCompile How to compile the Toy Version].
   * [BlasterCompile How to compile the Blaster Version].
+  * [ToyConfiguation Configuration keys for Toy version].
