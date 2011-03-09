@@ -164,7 +164,7 @@ logexceptionhits = 2
 # Normally you would have your firewall protecting this, but if you want
 # you can limit it to a certain IP. To bind to multiple interfaces,
 # specify each IP on an individual filterip line.
-# filterip =
+filterip = 0.0.0.0
 
 
 # Filter Port
