@@ -31,8 +31,7 @@ internallogfilemask=7
 
 
 # Acces Log Fiel Separator
-# String for separating access.log fields, it supports C stile characters like \
-t, \n, etc.
+# String for separating access.log fields, it supports C stile characters like \t, \n, etc.
 # Default value: \t
 accesslogfielseparator = \t
 
