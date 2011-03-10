@@ -168,14 +168,14 @@ bool OptionContainer::read(const char *filename, int type) {
                 log.setFlushLogsImmediately(true);
 
             if (findoptionS("transparentproxy") == "on")
-                transparentProxy=true;
+                transparentProxy = true;
             else
-                transparentProxy=false;
+                transparentProxy = false;
 
             if (findoptionS("forcegooglesafesearch") == "on")
-                forceGoogleSafeSearch=true;
+                forceGoogleSafeSearch = true;
             else
-                forceGoogleSafeSearch=false;
+                forceGoogleSafeSearch = false;
 
             if (type == 0) {
                 return true;
@@ -378,6 +378,12 @@ bool OptionContainer::read(const char *filename, int type) {
 
         // multiple listen IP support
         filter_ip = findoptionM("filterip");
+
+        if (!filter_ip.size()) {
+            std::cerr << "ERROR: There is no filterip configured." << std::endl;
+            return false;
+        }
+
         if (filter_ip.size() > 127) {
             if (!is_daemonised) {
                 std::cerr << "Can not listen on more than 127 IPs" << std::endl;

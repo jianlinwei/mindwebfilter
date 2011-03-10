@@ -3,7 +3,7 @@
 # Format is <user>=filter<1-9> where 1-9 are the groups
 #
 # Eg:
-# daniel=filter2
+# admin=filter1
 #
 # This file is only of use if you have more than 1 filter group
 #
