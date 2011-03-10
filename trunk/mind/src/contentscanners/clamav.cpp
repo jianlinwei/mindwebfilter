@@ -101,7 +101,7 @@ CSPlugin *clamavcreate(ConfigVar & definition)
 int clamavinstance::quit()
 {
 	cl_free(root);
-	return DGCS_OK;
+	return MIND_CS_OK;
 }
 
 // does the given request need virus scanning?
@@ -284,5 +284,5 @@ int clamavinstance::init(void* args)
 		syslog(LOG_ERR, "Error building clamav db: %s", cl_strerror(rc));
 		return DGCS_ERROR;
 	}
-	return DGCS_OK;
+	return MIND_CS_OK;
 }

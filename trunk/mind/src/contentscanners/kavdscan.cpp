@@ -91,7 +91,7 @@ int kavdinstance::init(void* args)
 	// read in path prefix
 	pathprefix = cv["pathprefix"];
 
-	return DGCS_OK;
+	return MIND_CS_OK;
 }
 
 
