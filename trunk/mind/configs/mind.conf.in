@@ -5,6 +5,10 @@
 # Please keep in mind that MinD has some new keys and some DG keys are 
 # obsolete for MinD.
 
+# Directory for locating logs
+#
+# loglocation = /var/log/mind
+
 # Internal Log file by message type.
 # 
 # Internal MinD log (mind.log):
