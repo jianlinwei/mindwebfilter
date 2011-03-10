@@ -137,9 +137,10 @@ bool OptionContainer::read(const char *filename, int type) {
                 pid_filename += "/mind.pid";
             }
 
-            if ((!log.setLogLocation(findoptionS("loglocation").c_str()))) {
+            if (!findoptionS("loglocation").length())
                 log.setLogLocation(__LOGLOCATION);
-            }
+            else
+                log.setLogLocation(findoptionS("loglocation").c_str());
 
             if (findoptionI("internallogfilemask"))
                 log.setInternalLogMask(findoptionI("internallogfilemask"));
