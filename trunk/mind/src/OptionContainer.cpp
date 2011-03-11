@@ -32,6 +32,7 @@
 #include <fstream>
 #include <sstream>
 #include <syslog.h>
+#include <stdlib.h>
 
 // GLOBALS
 
@@ -120,6 +121,12 @@ bool OptionContainer::read(const char *filename, int type) {
         conffiles.close();
 
         filterworkmode = findoptionI("filterworkmode");
+
+        //@TODO: Eliminate when this develop has finished.
+        if (filterworkmode == 2){
+            std::cerr << "Error: ICAP server workmode is not supported yet.\n" << std::endl;
+            exit (EXIT_FAILURE);
+        }
 
         if (type == 0 || type == 2) {
 
