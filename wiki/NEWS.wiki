@@ -6,3 +6,4 @@ Here we will write all documentation about the progress of MinD Project.
 = News by dates =
 
 * 2011-03-26 - MinD RC1 will be released on April 30th.
+* 2011-03-28 - Starting today: MinD updates its URL lists every two days.
