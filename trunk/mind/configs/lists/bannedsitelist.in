@@ -66,6 +66,7 @@ badboys.com
 # To work with advanced ad blocking & the logadblocks option, advert
 # phrase/site/URL lists should have the string "ADs" in their listcategory.
 .Include<@DGCONFDIR@/lists/blacklists/ads/domains>
+.Include<@DGCONFDIR@/lists/blacklists/porn/domains>
 
 #Remove the # from the following and edit as needed to use a stock
 #squidGuard/urlblacklists collection.
