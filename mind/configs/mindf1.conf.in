@@ -93,8 +93,8 @@ bannedregexpheaderlist = '@DGCONFDIR@/lists/bannedregexpheaderlist'
 # good subjects will have negative values, and bad subjects will have positive
 # values.  See the weightedphraselist file for examples.
 # As a guide:
-# 50 is for young children,  100 for old children,  160 for young adults.
-naughtynesslimit = 50
+# 100 is for young children,  160 for old children,  200 for young adults.
+naughtynesslimit = 170
 
 # Category display threshold
 # This option only applies to pages blocked by weighted phrase filtering.
