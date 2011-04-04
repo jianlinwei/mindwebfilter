@@ -634,8 +634,9 @@ maxsparechildren = 64
 
 # sets the maximum age of a child process before it croaks it.
 # This is the number of connections they handle before exiting.
-# On small servers you might want to try 1000.
-maxagechildren = 10000
+# On all servers you might want to use 1000. 
+# We recomend do not modify this value.
+maxagechildren = 1000
 
 
 # Sets the maximum number client IP addresses allowed to connect at once.
