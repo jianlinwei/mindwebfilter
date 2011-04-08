@@ -10,6 +10,7 @@ install-data-local:
 		   if test -f $$f ; then \
 			echo "$(INSTALL_DATA) $$f $(DESTDIR)$(DGDATADIR)/$$l"; \
 			$(INSTALL_DATA) $$f $(DESTDIR)$(DGDATADIR)/$$l; \
+			chown $(DGPROXYUSER):$(DGPROXYGROUP) "$(DESTDIR)$(DGDATADIR)/$$l"; \
 	           fi \
 		done \
 	done
