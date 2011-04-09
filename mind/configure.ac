@@ -1,6 +1,7 @@
 # Autoconf script
 # Inspired by a script provided by Alex Ott
 # 2004,2005 - Daniel Barron
+# 2011 - Some improvements and corrections by MinD Team
 
 AC_PREREQ(2.57)
 AC_INIT(mind, 1.0)
@@ -183,6 +184,25 @@ fi], [
 ])
 AC_FINALIZE_VAR(DGLOGLOCATION,"$logdir")
 AC_SUBST(DGLOGLOCATION)
+
+
+AC_MSG_CHECKING(for listdir)
+AC_ARG_WITH(listdir,
+[AC_HELP_STRING([--with-listdir@<:@=PREFIX/LOCALSTATEDIR/mind/lists@:>@], [path for URLs/phrases lists files])],
+[if test "x${withval}" != "x" ; then
+  AC_MSG_RESULT(yes)
+  listdir=${withval}
+else
+  AC_MSG_RESULT(no)
+  listdir="${localstatedir}/${PACKAGE_NAME}/lists"
+fi], [
+  # disable by default
+  AC_MSG_RESULT(no)
+  listdir="${localstatedir}/${PACKAGE_NAME}/lists"
+])
+AC_FINALIZE_VAR(MIND_LIST_LOCATION,"$listdir")
+AC_SUBST(MIND_LIST_LOCATION)
+
 
 PKG_PROG_PKG_CONFIG
 

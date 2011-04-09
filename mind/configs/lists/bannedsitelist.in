@@ -65,51 +65,51 @@ badboys.com
 # The squidGuard advert domain/URL lists are now included by default.
 # To work with advanced ad blocking & the logadblocks option, advert
 # phrase/site/URL lists should have the string "ADs" in their listcategory.
-.Include<@DGCONFDIR@/lists/blacklists/ads/domains>
-.Include<@DGCONFDIR@/lists/blacklists/porn/domains>
+.Include<@MIND_LIST_LOCATION@/blacklists/ads/domains>
+.Include<@MIND_LIST_LOCATION@/blacklists/porn/domains>
 
 #Remove the # from the following and edit as needed to use a stock
 #squidGuard/urlblacklists collection.
-#.Include<@DGCONFDIR@/lists/blacklists/adult/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/aggressive/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/artnudes/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/audio-video/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/beerliquorinfo/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/beerliquorsale/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/chat/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/childcare/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/clothing/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/culinary/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/dialers/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/drugs/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/entertainment/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/forums/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/frencheducation/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/gambling/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/government/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/hacking/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/homerepair/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/hygiene/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/jewelry/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/jobsearch/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/kidstimewasting/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/mail/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/news/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/onlineauctions/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/onlinegames/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/onlinepayment/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/personalfinance/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/pets/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/porn/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/proxy/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/publicite/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/redirector/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/ringtones/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/sportnews/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/sports/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/vacation/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/violence/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/virusinfected/domains>
-#.Include<@DGCONFDIR@/lists/blacklists/warez/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/adult/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/aggressive/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/artnudes/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/audio-video/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/beerliquorinfo/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/beerliquorsale/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/chat/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/childcare/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/clothing/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/culinary/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/dialers/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/drugs/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/entertainment/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/forums/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/frencheducation/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/gambling/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/government/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/hacking/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/homerepair/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/hygiene/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/jewelry/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/jobsearch/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/kidstimewasting/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/mail/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/news/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/onlineauctions/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/onlinegames/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/onlinepayment/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/personalfinance/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/pets/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/porn/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/proxy/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/publicite/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/redirector/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/ringtones/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/sportnews/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/sports/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/vacation/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/violence/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/virusinfected/domains>
+#.Include<@MIND_LIST_LOCATION@/blacklists/warez/domains>
 
 # You will need to edit to add and remove categories you want

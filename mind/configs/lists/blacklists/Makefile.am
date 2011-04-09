@@ -1,6 +1,7 @@
 MAINTAINERCLEANFILES    = Makefile.in
 
-DGDATADIR = $(DGCONFDIR)/lists/blacklists
+#DGDATADIR = $(DGCONFDIR)/lists/blacklists
+DGDATADIR = $(MIND_LIST_LOCATION)/blacklists
 BLACKLISTS = ads porn
 
 install-data-local: 

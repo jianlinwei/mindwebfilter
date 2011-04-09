@@ -31,29 +31,29 @@ members.home.net/uporn
 # The squidGuard advert domain/URL lists are now included by default.
 # To work with advanced ad blocking & the logadblocks option, advert
 # phrase/site/URL lists should have the string "ADs" in their listcategory.
-.Include<@DGCONFDIR@/lists/blacklists/ads/urls>
+.Include<@MIND_LIST_LOCATION@/blacklists/ads/urls>
 
 #Remove the # from the following and edit as needed to use a stock
 #squidGuard/urlblacklist blacklists collection.
-#.Include<@DGCONFDIR@/lists/blacklists/adult/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/aggressive/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/audio-video/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/chat/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/drugs/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/entertainment/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/frencheducation/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/gambling/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/government/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/hacking/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/jobsearch/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/kidstimewasting/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/mail/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/news/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/porn/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/proxy/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/publicite/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/redirector/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/violence/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/virusinfected/urls>
-#.Include<@DGCONFDIR@/lists/blacklists/warez/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/adult/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/aggressive/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/audio-video/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/chat/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/drugs/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/entertainment/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/frencheducation/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/gambling/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/government/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/hacking/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/jobsearch/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/kidstimewasting/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/mail/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/news/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/porn/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/proxy/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/publicite/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/redirector/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/violence/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/virusinfected/urls>
+#.Include<@MIND_LIST_LOCATION@/blacklists/warez/urls>
 # You will need to edit to add and remove categories you want
