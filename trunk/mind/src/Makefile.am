@@ -1,4 +1,5 @@
-clean_SUBDIRS= . downloadmanagers contentscanners authplugins
+clean_SUBDIRS= . downloadmanagers contentscanners authplugins libcsoap
+SUBDIRS=libcsoap
 
 # A MASSIVE thank you to Lawrence Manning for pointing out the
 # -export-dynamic option was needed to solve a long problem
