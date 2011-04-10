@@ -3,6 +3,7 @@
 # 2004,2005 - Daniel Barron
 # 2011 - Some improvements and corrections by MinD Team
 
+
 AC_PREREQ(2.57)
 AC_INIT(mind, 1.0)
 AM_INIT_AUTOMAKE
@@ -615,6 +616,15 @@ fi],
 )
 AM_CONDITIONAL(ENABLE_NTLM, test "x$ntlm" = "xtrue")
 AC_SUBST(NTLMSUPPORT)
+
+
+# Getting revision number
+export revision=$(LANG=C svn info | grep Revision )
+AC_DEFINE_UNQUOTED([MIND_REVISION], ["$revision"], [Mind Rev. number])
+
+# Defining Code Name / SLC State
+AC_DEFINE_UNQUOTED([MIND_CODENAME], ["Toy"], [Mind codename])
+AC_DEFINE_UNQUOTED([MIND_SLC_STATE], ["BETA"], [Mind codename])
 
 # asking the user if they want email notifications
 AC_MSG_CHECKING(for email notification support)

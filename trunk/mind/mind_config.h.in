@@ -186,11 +186,20 @@
 /* Define to 1 if you have the <zlib.h> header file. */
 #undef HAVE_ZLIB_H
 
+/* Mind codename */
+#undef MIND_CODENAME
+
 /* Record configure-time options */
 #undef MIND_CONFIGURE_OPTIONS
 
 /* Define to enable debug build mode */
 #undef MIND_DEBUG
+
+/* Mind Rev. number */
+#undef MIND_REVISION
+
+/* Mind codename */
+#undef MIND_SLC_STATE
 
 /* Define if type "off_t" is a typedef of another type for which String
    already has a constructor */
