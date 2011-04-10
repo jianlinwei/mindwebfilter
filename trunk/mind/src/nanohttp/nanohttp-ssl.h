@@ -25,7 +25,7 @@
 #define __NANOHTTP_SSL_H_
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_SSL

@@ -44,6 +44,7 @@
 #include "nanohttp-logging.h"
 #include "nanohttp-common.h"
 #include "nanohttp-response.h"
+#include <errno.h>
 
 static hresponse_t *
 hresponse_new()

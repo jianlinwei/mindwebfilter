@@ -1,5 +1,4 @@
-clean_SUBDIRS= . downloadmanagers contentscanners authplugins libcsoap
-SUBDIRS=libcsoap
+clean_SUBDIRS= . downloadmanagers contentscanners authplugins
 
 # A MASSIVE thank you to Lawrence Manning for pointing out the
 # -export-dynamic option was needed to solve a long problem
@@ -112,6 +111,7 @@ mind_SOURCES = String.cpp String.hpp \
                        ContentScanner.cpp ContentScanner.hpp \
 		       SocketArray.cpp SocketArray.hpp \
                        Logger.cpp Logger.hpp \
+                       soapFunctions.cpp soapFunctions.hpp \
                        mind.cpp \
 		       Plugin.hpp \
 		       $(CLAMAV_SOURCE) $(ICAPSCAN_SOURCE) \

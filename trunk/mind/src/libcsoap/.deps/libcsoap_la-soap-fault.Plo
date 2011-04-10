@@ -5,7 +5,7 @@ libcsoap_la-soap-fault.lo: soap-fault.c ../../mind_config.h \
  /usr/include/gnu/stubs-64.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stddef.h \
  /usr/include/xlocale.h ../nanohttp/nanohttp-logging.h soap-fault.h \
- soap-xml.h /usr/include/libxml2/libxml/xpath.h \
+ soap-xml.h ../../mind_config.h /usr/include/libxml2/libxml/xpath.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
  /usr/include/libxml2/libxml/xmlerror.h \
@@ -35,7 +35,7 @@ libcsoap_la-soap-fault.lo: soap-fault.c ../../mind_config.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/threads.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
- ../nanohttp/nanohttp-common.h soap-xml.h
+ ../nanohttp/nanohttp-common.h
 
 ../../mind_config.h:
 
@@ -62,6 +62,8 @@ libcsoap_la-soap-fault.lo: soap-fault.c ../../mind_config.h \
 soap-fault.h:
 
 soap-xml.h:
+
+../../mind_config.h:
 
 /usr/include/libxml2/libxml/xpath.h:
 
@@ -160,5 +162,3 @@ soap-xml.h:
 /usr/include/libxml2/libxml/xpathInternals.h:
 
 ../nanohttp/nanohttp-common.h:
-
-soap-xml.h:

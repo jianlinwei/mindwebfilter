@@ -22,7 +22,7 @@
 * Author: Matt Campbell
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_SYS_TYPES_H
@@ -75,6 +75,7 @@
 #include "nanohttp-common.h"
 #include "nanohttp-socket.h"
 #include "nanohttp-ssl.h"
+#include <errno.h>
 
 #ifdef HAVE_SSL
 

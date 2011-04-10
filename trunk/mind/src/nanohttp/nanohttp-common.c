@@ -22,7 +22,7 @@
 * Email: ayaz@jprogrammer.net
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_STDIO_H
@@ -53,6 +53,7 @@
 #include <utils/alloc.h>
 #endif
 
+#include <stdarg.h>
 #include "nanohttp-common.h"
 #include "nanohttp-logging.h"
 

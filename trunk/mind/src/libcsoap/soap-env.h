@@ -24,7 +24,7 @@
 #ifndef cSOAP_ENV_H
 #define cSOAP_ENV_H
 
-#include <../nanohttp/nanohttp-stream.h>
+#include "../nanohttp/nanohttp-stream.h"
 
 #include "soap-xml.h"
 #include "soap-fault.h"

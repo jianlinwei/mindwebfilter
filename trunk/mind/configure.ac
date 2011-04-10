@@ -34,12 +34,24 @@ AC_CHECK_HEADERS([sys/types.h sys/un.h sys/poll.h sys/resource.h])
 AC_CHECK_HEADERS([pwd.h grp.h])
 AC_CHECK_HEADERS([byteswap.h])
 
+AC_CHECK_LIB(socket, socket, [LIBSOCKET="-lsocket"])
+AC_SUBST(LIBSOCKET)
+
+AC_CHECK_LIB(nsl, inet_ntoa, [LIBNSL="-lnsl"])
+AC_CHECK_LIB(nsl, gethostbyname, [LIBNSL="-lnsl"])
+AC_SUBST(LIBNSL)
+
 AM_PATH_XML2(2.6.0,CFLAGS="$CFLAGS $XML_CPPFLAGS"; LDFLAGS="$LDFLAGS $XML_LIBS",exit 1)
+
+AC_CACHE_SAVE
 
 csoap_release=1
 csoap_version=1
 AC_SUBST(csoap_release)
 AC_SUBST(csoap_version)
+
+nanohttp_version=1
+AC_SUBST(nanohttp_version)
 
 
 AC_FUNC_MALLOC
@@ -728,8 +740,6 @@ AC_CONFIG_FILES([Makefile
 		configs/authplugins/ip.conf
 		configs/lists/authplugins/Makefile
 		configs/lists/downloadmanagers/Makefile
-                src/nanohttp/Makefile
-                src/libcsoap/Makefile
                 src/Makefile
 		])
 

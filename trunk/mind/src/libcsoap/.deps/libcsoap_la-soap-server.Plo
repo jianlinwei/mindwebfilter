@@ -48,8 +48,8 @@ libcsoap_la-soap-server.lo: soap-server.c ../../mind_config.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/threads.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
- ../nanohttp/nanohttp-common.h soap-fault.h soap-xml.h soap-router.h \
- soap-service.h soap-ctx.h ../nanohttp/nanohttp-common.h
+ ../nanohttp/nanohttp-common.h soap-fault.h soap-router.h soap-service.h \
+ soap-ctx.h
 
 ../../mind_config.h:
 
@@ -233,12 +233,8 @@ soap-xml.h:
 
 soap-fault.h:
 
-soap-xml.h:
-
 soap-router.h:
 
 soap-service.h:
 
 soap-ctx.h:
-
-../nanohttp/nanohttp-common.h:

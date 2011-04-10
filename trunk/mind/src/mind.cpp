@@ -26,6 +26,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#ifdef SOAP_SUPPORT
+#include <sys/stat.h>
+#endif
+
 #ifdef HAVE_CONFIG_H
 #include "../mind_config.h"
 #endif
@@ -33,6 +37,11 @@
 #include "SysV.hpp"
 #include "Logger.hpp"
 #include "mind.hpp"
+
+#ifdef SOAP_SUPPORT
+#include "libcsoap/soap-server.h"
+#include "soapFunctions.hpp"
+#endif
 
 Logger log = Logger();
 OptionContainer o;
@@ -127,7 +136,7 @@ int main(int argc, char *argv[]) {
                         }
                         break;
                     default:
-                        std::cout << "Error in parameters"<< std::endl;
+                        std::cout << "Error in parameters" << std::endl;
                     case 'h':
                         std::cout << "Usage: " << argv[0] << " [{-c ConfigFileName|-v|-P|-h|-N|-q|-s|-r|-g}]" << std::endl;
                         std::cout << "  -v gives the version number and build options." << std::endl;
@@ -242,6 +251,9 @@ int main(int argc, char *argv[]) {
     // this is no longer a class, but the comment has been retained for historical reasons. PRA 03-10-2005
     //FatController f;  // Thomas The Tank Engine
 
+#ifdef SOAP_SUPPORT
+    launchSoapServer(argv[0]);
+#endif
     while (true) {
         rc = fc_controlit();
         // its a little messy, but I wanted to split
@@ -325,3 +337,38 @@ void read_config(const char *configfile, int type) {
         exit(1); // OptionContainer class had an error reading the conf or other files so exit with error
     }
 }
+
+#ifdef SOAP_SUPPORT
+void launchSoapServer(char* procName) {
+    pid_t pid;
+    int nullfd = -1;
+    SoapRouter *router;
+
+    log.writeToLog(0, "Starting soap server.");
+
+    if ((pid = fork()) < 0) {
+        return;
+    } else if (pid != 0) {
+        if (nullfd != -1) {
+            close(nullfd);
+        }
+        exit(0); // parent goes bye-bye
+    }
+    // child continues
+    dup2(nullfd, 0); // stdin
+    dup2(nullfd, 1); // stdout
+    dup2(nullfd, 2); // stderr
+    close(nullfd);
+
+    setsid(); // become session leader
+    chdir("/"); // change working directory
+    umask(0); // clear our file mode creation mask
+    strcpy(procName, "MinD_soap_server\0");
+
+    router = soap_router_new();
+    soap_router_register_service(router, filterShutdown, "filterShutdown", "urn:filterManager");
+    soap_server_register_router(router, "/mindSoapServer");
+    soap_server_run();
+    return;
+}
+#endif
