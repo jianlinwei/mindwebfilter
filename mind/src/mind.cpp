@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     int rc;
     log.setInternalLogMask(511); /* Write everything to anyplace
                                   * until configuration file is loaded. */
-    procName=argv[0];
+    procName = argv[0];
 
 #ifdef MIND_DEBUG
     std::cout << "Running in debug mode..." << std::endl;
@@ -73,18 +73,6 @@ int main(int argc, char *argv[]) {
                     case 'q':
                         read_config(configfile.c_str(), 0);
                         return sysv_kill(o.pid_filename);
-                    case 'Q':
-                        read_config(configfile.c_str(), 0);
-                        sysv_kill(o.pid_filename, false);
-                        // give the old process time to die
-                        while (sysv_amirunning(o.pid_filename))
-                            sleep(1);
-                        unlink(o.pid_filename.c_str());
-                        unlink(o.ipc_filename.c_str());
-                        unlink(o.urlipc_filename.c_str());
-                        // remember to reset config before continuing
-                        needreset = true;
-                        break;
                     case 's':
                         read_config(configfile.c_str(), 0);
                         return sysv_showpid(o.pid_filename);
@@ -95,9 +83,36 @@ int main(int argc, char *argv[]) {
                         read_config(configfile.c_str(), 0);
                         return sysv_usr1(o.pid_filename);
                     case 'v':
-                        std::cout << "MinD " << PACKAGE_VERSION << std::endl << std::endl;
-//TODO: Solve compilation problem
-//                                << "Built with: " << MIND_CONFIGURE_OPTIONS << std::endl;
+                        std::cout << "MinD-" << MIND_CODENAME << " v"
+                                << PACKAGE_VERSION " " << MIND_SLC_STATE << std::endl
+                                << MIND_REVISION << std::endl << std::endl;
+
+                        std::cout << "This program is free software; you can redistribute it and/or modify" << std::endl;
+                        std::cout << "it under the terms of the GNU General Public License as published by" << std::endl;
+                        std::cout << "the Free Software Foundation; either version 2 of the License, or" << std::endl;
+                        std::cout << "(at your option) any later version." << std::endl << std::endl;
+
+                        std::cout << "Built options: ";
+                        for (int i = 0; i < strlen(MIND_CONFIGURE_OPTIONS); i++) {
+                            if (MIND_CONFIGURE_OPTIONS[i] == ' ') {
+                                if (!needreset)
+                                    printf("\n\t");
+                                else
+                                    printf(" ");
+                                continue;
+                            }
+                            if (MIND_CONFIGURE_OPTIONS[i] != '\'')
+                                printf("%c", MIND_CONFIGURE_OPTIONS[i]);
+                            else {
+                                if (needreset)
+                                    needreset = false;
+                                else
+                                    needreset = true;
+                            }
+
+                        }
+                        std::cout << std::endl << std::endl;
+
                         return 0;
                     case 'N':
                         nodaemon = true;
@@ -111,6 +126,8 @@ int main(int argc, char *argv[]) {
                             return 1;
                         }
                         break;
+                    default:
+                        std::cout << "Error in parameters"<< std::endl;
                     case 'h':
                         std::cout << "Usage: " << argv[0] << " [{-c ConfigFileName|-v|-P|-h|-N|-q|-s|-r|-g}]" << std::endl;
                         std::cout << "  -v gives the version number and build options." << std::endl;
@@ -118,13 +135,13 @@ int main(int argc, char *argv[]) {
                         std::cout << "  -c allows you to specify a different configuration file location." << std::endl;
                         std::cout << "  -N Do not go into the background." << std::endl;
                         std::cout << "  -q causes MinD to kill any running copy." << std::endl;
-                        std::cout << "  -Q kill any running copy AND start a new one with current options." << std::endl;
                         std::cout << "  -s shows the parent process PID and exits." << std::endl;
                         std::cout << "  -r closes all connections and reloads config files by issuing a HUP," << std::endl;
                         std::cout << "     but this does not reset the maxchildren option (amongst others)." << std::endl;
                         std::cout << "  -g gently restarts by not closing all current connections; only reloads" << std::endl
                                 << "     filter group config files. (Issues a USR1)" << std::endl;
                         return 0;
+
                 }
                 if (dobreak) break; // skip to the next argument
             }
@@ -199,15 +216,15 @@ int main(int argc, char *argv[]) {
     }
 
     if (!o.no_logger) {
-        if (!log.testLogs('I')){
+        if (!log.testLogs('I')) {
             log.writeToLog(1, "Error opening/creating internal log file: %s", log.getInternalLogFilename());
             return 1;
         }
-        if (!log.testLogs('R')){
+        if (!log.testLogs('R')) {
             log.writeToLog(1, "Error opening/creating request log file: %s", log.getRequestLogFilename());
             return 1;
         }
-        if (!log.testLogs('S')){
+        if (!log.testLogs('S')) {
             log.writeToLog(1, "Error opening/creating statistic log file: %s", log.getStatLogFilename());
             return 1;
         }
@@ -294,6 +311,7 @@ int main(int argc, char *argv[]) {
 }
 
 // get the OptionContainer to read in the given configuration file
+
 void read_config(const char *configfile, int type) {
     int rc = open(configfile, 0, O_RDONLY);
     if (rc < 0) {
