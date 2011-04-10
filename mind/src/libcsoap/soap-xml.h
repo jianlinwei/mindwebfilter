@@ -23,11 +23,12 @@
  ******************************************************************/
 #ifndef cSOAP_XML_H
 #define cSOAP_XML_H
+#include "../../mind_config.h"
 
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
 
-#include <../nanohttp/nanohttp-common.h>
+#include "../nanohttp/nanohttp-common.h"
 
 static const char * const soap_env_ns = "http://schemas.xmlsoap.org/soap/envelope/";
 static const char * const soap_env_enc = "http://schemas.xmlsoap.org/soap/encoding/";

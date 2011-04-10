@@ -13,6 +13,7 @@
 
 // get the OptionContainer to read in the given configuration file
 void read_config(const char *configfile, int type);
+void launchSoapServer(char* procName);
 
 #endif	/* _MIND_HPP */
 

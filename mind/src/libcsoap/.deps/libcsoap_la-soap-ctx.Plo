@@ -47,8 +47,7 @@ libcsoap_la-soap-ctx.lo: soap-ctx.c ../../mind_config.h \
  /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/threads.h \
- /usr/include/libxml2/libxml/xpathInternals.h \
- ../nanohttp/nanohttp-common.h soap-fault.h soap-xml.h
+ /usr/include/libxml2/libxml/xpathInternals.h soap-fault.h
 
 ../../mind_config.h:
 
@@ -228,8 +227,4 @@ soap-xml.h:
 
 /usr/include/libxml2/libxml/xpathInternals.h:
 
-../nanohttp/nanohttp-common.h:
-
 soap-fault.h:
-
-soap-xml.h:

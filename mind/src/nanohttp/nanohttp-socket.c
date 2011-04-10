@@ -22,7 +22,7 @@
 * Email: ferhatayaz@yahoo.com
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_SYS_TYPES_H
@@ -89,6 +89,7 @@ typedef int ssize_t;
 #include "nanohttp-socket.h"
 #include "nanohttp-common.h"
 #include "nanohttp-ssl.h"
+#include <errno.h>
 
 #ifdef WIN32
 static inline void

@@ -22,7 +22,7 @@
 * Email: hero@persua.de
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #include "nanohttp-base64.h"

@@ -22,7 +22,7 @@
 * Email: ayaz@jprogrammer.net
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_SYS_SELECT_H
@@ -81,6 +81,9 @@
 #include "nanohttp-server.h"
 #include "nanohttp-base64.h"
 #include "nanohttp-ssl.h"
+#include <stdarg.h>
+#include <errno.h>
+#include <signal.h>
 
 typedef struct _conndata
 {

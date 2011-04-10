@@ -1,5 +1,5 @@
 libcsoap_la-soap-xml.lo: soap-xml.c ../../mind_config.h \
- ../nanohttp/nanohttp-logging.h soap-xml.h \
+ ../nanohttp/nanohttp-logging.h soap-xml.h ../../mind_config.h \
  /usr/include/libxml2/libxml/xpath.h \
  /usr/include/libxml2/libxml/xmlversion.h \
  /usr/include/libxml2/libxml/xmlexports.h \
@@ -41,6 +41,8 @@ libcsoap_la-soap-xml.lo: soap-xml.c ../../mind_config.h \
 ../nanohttp/nanohttp-logging.h:
 
 soap-xml.h:
+
+../../mind_config.h:
 
 /usr/include/libxml2/libxml/xpath.h:
 

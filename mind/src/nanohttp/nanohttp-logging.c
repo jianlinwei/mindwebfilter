@@ -22,7 +22,7 @@
 * Email: ayaz@jprogrammer.net
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_STDIO_H
@@ -50,6 +50,9 @@
 #endif
 
 #include "nanohttp-logging.h"
+#include <errno.h>
+#include <stdarg.h>
+#include <stdio.h>
 
 #ifdef WIN32
 #ifndef __MINGW32__

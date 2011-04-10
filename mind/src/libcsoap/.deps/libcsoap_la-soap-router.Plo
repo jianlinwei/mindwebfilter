@@ -45,11 +45,9 @@ libcsoap_la-soap-router.lo: soap-router.c ../../mind_config.h \
  /usr/include/libxml2/libxml/xmlmemory.h \
  /usr/include/libxml2/libxml/threads.h \
  /usr/include/libxml2/libxml/xpathInternals.h \
- ../nanohttp/nanohttp-common.h soap-fault.h soap-xml.h soap-ctx.h \
- ../nanohttp/nanohttp-common.h ../nanohttp/nanohttp-server.h \
- ../nanohttp/nanohttp-common.h ../nanohttp/nanohttp-socket.h \
- ../nanohttp/nanohttp-request.h ../nanohttp/nanohttp-stream.h \
- ../nanohttp/nanohttp-mime.h
+ ../nanohttp/nanohttp-common.h soap-fault.h soap-ctx.h \
+ ../nanohttp/nanohttp-server.h ../nanohttp/nanohttp-request.h \
+ ../nanohttp/nanohttp-stream.h ../nanohttp/nanohttp-mime.h
 
 ../../mind_config.h:
 
@@ -225,17 +223,9 @@ soap-xml.h:
 
 soap-fault.h:
 
-soap-xml.h:
-
 soap-ctx.h:
 
-../nanohttp/nanohttp-common.h:
-
 ../nanohttp/nanohttp-server.h:
-
-../nanohttp/nanohttp-common.h:
-
-../nanohttp/nanohttp-socket.h:
 
 ../nanohttp/nanohttp-request.h:
 

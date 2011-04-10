@@ -22,7 +22,7 @@
 * Email: ayaz@jprogrammer.net
 ******************************************************************/
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#include "../../mind_config.h"
 #endif
 
 #ifdef HAVE_STDIO_H
@@ -44,6 +44,7 @@
 #include "nanohttp-logging.h"
 #include "nanohttp-common.h"
 #include "nanohttp-request.h"
+#include <errno.h>
 
 static hrequest_t *
 hrequest_new(void)
