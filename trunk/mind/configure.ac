@@ -18,6 +18,10 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
+AC_LANG_C
+AC_PROG_AWK
+AC_PROG_INSTALL
+AC_PROG_LIBTOOL
 
 AC_LANG(C++)
 
@@ -29,6 +33,21 @@ AC_CHECK_HEADERS([string.h sys/socket.h sys/time.h syslog.h unistd.h locale.h])
 AC_CHECK_HEADERS([sys/types.h sys/un.h sys/poll.h sys/resource.h])
 AC_CHECK_HEADERS([pwd.h grp.h])
 AC_CHECK_HEADERS([byteswap.h])
+
+AM_PATH_XML2(2.6.0,CFLAGS="$CFLAGS $XML_CPPFLAGS"; LDFLAGS="$LDFLAGS $XML_LIBS",exit 1)
+
+csoap_release=1
+csoap_version=1
+AC_SUBST(csoap_release)
+AC_SUBST(csoap_version)
+
+
+AC_FUNC_MALLOC
+AC_FUNC_VPRINTF
+AC_FUNC_STRFTIME
+AC_FUNC_SELECT_ARGTYPES
+AC_CHECK_FUNCS([gethostbyname inet_ntoa memmove memset mkdir select socket strchr strdup strncasecmp strpbrk strspn strstr strtol])
+
 
 # Check system endianness
 AC_C_BIGENDIAN
@@ -709,7 +728,11 @@ AC_CONFIG_FILES([Makefile
 		configs/authplugins/ip.conf
 		configs/lists/authplugins/Makefile
 		configs/lists/downloadmanagers/Makefile
+                src/nanohttp/Makefile
+                src/libcsoap/Makefile
                 src/Makefile
 		])
 
 AC_OUTPUT
+
+ln -s --force /usr/bin/libtool .

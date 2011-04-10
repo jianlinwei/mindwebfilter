@@ -48,6 +48,12 @@
 /* Define to enable POSIX Shared Memory support in ClamAV content scanner */
 #undef HAVE_CLAMAV_SHM
 
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+#undef HAVE_DOPRNT
+
 /* Define to 1 if you have the `dup2' function. */
 #undef HAVE_DUP2
 
@@ -56,6 +62,9 @@
 
 /* Define to 1 if you have the `fork' function. */
 #undef HAVE_FORK
+
+/* Define to 1 if you have the `gethostbyname' function. */
+#undef HAVE_GETHOSTBYNAME
 
 /* Define to 1 if you have the `gettimeofday' function. */
 #undef HAVE_GETTIMEOFDAY
@@ -66,6 +75,9 @@
 /* Define to 1 if you have the `iconv' function. */
 #undef HAVE_ICONV
 
+/* Define to 1 if you have the `inet_ntoa' function. */
+#undef HAVE_INET_NTOA
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
@@ -75,11 +87,21 @@
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
 
+/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+   to 0 otherwise. */
+#undef HAVE_MALLOC
+
+/* Define to 1 if you have the `memmove' function. */
+#undef HAVE_MEMMOVE
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
 /* Define to 1 if you have the `memset' function. */
 #undef HAVE_MEMSET
+
+/* Define to 1 if you have the `mkdir' function. */
+#undef HAVE_MKDIR
 
 /* Define to 1 if you have the <netdb.h> header file. */
 #undef HAVE_NETDB_H
@@ -117,20 +139,41 @@
 /* Define to 1 if you have the `shm_open' function. */
 #undef HAVE_SHM_OPEN
 
+/* Define to 1 if you have the `socket' function. */
+#undef HAVE_SOCKET
+
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
 
+/* Define to 1 if you have the `strchr' function. */
+#undef HAVE_STRCHR
+
+/* Define to 1 if you have the `strdup' function. */
+#undef HAVE_STRDUP
+
 /* Define to 1 if you have the `strerror' function. */
 #undef HAVE_STRERROR
+
+/* Define to 1 if you have the `strftime' function. */
+#undef HAVE_STRFTIME
 
 /* Define to 1 if you have the <strings.h> header file. */
 #undef HAVE_STRINGS_H
 
 /* Define to 1 if you have the <string.h> header file. */
 #undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strncasecmp' function. */
+#undef HAVE_STRNCASECMP
+
+/* Define to 1 if you have the `strpbrk' function. */
+#undef HAVE_STRPBRK
+
+/* Define to 1 if you have the `strspn' function. */
+#undef HAVE_STRSPN
 
 /* Define to 1 if you have the `strstr' function. */
 #undef HAVE_STRSTR
@@ -149,6 +192,9 @@
 
 /* Define to 1 if you have the <sys/resource.h> header file. */
 #undef HAVE_SYS_RESOURCE_H
+
+/* Define to 1 if you have the <sys/select.h> header file. */
+#undef HAVE_SYS_SELECT_H
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
 #undef HAVE_SYS_SOCKET_H
@@ -177,6 +223,9 @@
 /* Define to 1 if you have the <vfork.h> header file. */
 #undef HAVE_VFORK_H
 
+/* Define to 1 if you have the `vprintf' function. */
+#undef HAVE_VPRINTF
+
 /* Define to 1 if `fork' works. */
 #undef HAVE_WORKING_FORK
 
@@ -185,6 +234,10 @@
 
 /* Define to 1 if you have the <zlib.h> header file. */
 #undef HAVE_ZLIB_H
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
 
 /* Mind codename */
 #undef MIND_CODENAME
@@ -226,6 +279,15 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Define to the type of arg 1 for `select'. */
+#undef SELECT_TYPE_ARG1
+
+/* Define to the type of args 2, 3 and 4 for `select'. */
+#undef SELECT_TYPE_ARG234
+
+/* Define to the type of arg 5 for `select'. */
+#undef SELECT_TYPE_ARG5
+
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
@@ -246,6 +308,9 @@
 
 /* Define to `int' if <sys/types.h> doesn't define. */
 #undef gid_t
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#undef malloc
 
 /* Define to `long int' if <sys/types.h> does not define. */
 #undef off_t
