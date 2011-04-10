@@ -11,6 +11,8 @@ For compiling Toy version, you will need the following packages installed before
   * libz-dev
   * libpcre3-dev
   * libclamav-dev
+  * libxml2-dev
+  * libtool
 
 ==Download==
 
@@ -22,8 +24,7 @@ svn checkout http://mindwebfilter.googlecode.com/svn/trunk/ mindwebfilter-read-o
 ==Configuring==
 For using MinD without Clam Antivirus protection support just execute:
 {{{
-./autogen.sh
-./configure --mandir=/usr/share/man/ --enable-clamd=no --with-proxyuser=proxy \
+./bootstrap && ./configure --mandir=/usr/share/man/ --enable-clamd=no --with-proxyuser=proxy \
 --with-proxygroup=proxy --prefix=/ --mandir=/usr/share/man \
 --infodir=/usr/share/info --sysconfdir=/etc --localstatedir=/var \
 --enable-ntlm=yes CXX="g++" CXXFLAGS="-O3" LDFLAGS="-Wl,-Bsymbolic-functions" \
@@ -32,8 +33,7 @@ CPPFLAGS="" CC="cc" CFLAGS="-O3"
 
 For using MinD with Clam Antivirus protection support just execute:
 {{{
-./autogen.sh
-./configure --mandir=/usr/share/man/ --enable-clamd=yes --with-proxyuser=proxy \
+./bootstrap && ./configure --mandir=/usr/share/man/ --enable-clamd=yes --with-proxyuser=proxy \
 --with-proxygroup=proxy --prefix=/ --mandir=/usr/share/man \
 --infodir=/usr/share/info --sysconfdir=/etc --localstatedir=/var \
 --enable-ntlm=yes CXX="g++" CXXFLAGS="-O3" LDFLAGS="-Wl,-Bsymbolic-functions" \
