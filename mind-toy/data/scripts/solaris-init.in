@@ -23,7 +23,7 @@ stop)
         if [ -f @DGPIDDIR@/mind.pid ]; then
                 @DGBINDIR@/mind -q
                 /bin/rm -f @DGPIDDIR@/mind.pid
-                /bin/rm -f /tmp/.dguardianipc
+                /bin/rm -f /tmp/.mindipc
                 echo "MinD stopped."
         fi
         ;;

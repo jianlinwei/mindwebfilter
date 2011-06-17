@@ -18,8 +18,8 @@ start)
         ;;
 stop)
         @DGBINDIR@/mind -q
-        [ -r /tmp/.dguardianipc ] && echo -e ' mind\c'
-        rm -f /tmp/.dguardianipc
+        [ -r /tmp/.mindipc ] && echo -e ' mind\c'
+        rm -f /tmp/.mindipc
         ;;
 restart)
         $0 stop

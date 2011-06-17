@@ -95,7 +95,7 @@ stop)
                     echo " ]"
                 fi
                 /bin/rm -f @DGPIDDIR@/mind.pid
-                /bin/rm -f /tmp/.dguardianipc
+                /bin/rm -f /tmp/.mindipc
                 [ -d /var/lock/subsys ] && /bin/rm -f /var/lock/subsys/mind
         else
                 echo -e "\\033[60G\c"
