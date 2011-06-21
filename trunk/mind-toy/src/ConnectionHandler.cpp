@@ -386,18 +386,17 @@ void ConnectionHandler::handleConnection(Socket &peerconn, String &ip) {
     try {
 
         int rc;
-        if (o.filterworkmode == 1)
-        {
+        if (o.filterworkmode == 1) {
             // connect to proxy
             rc = proxysock.connect(o.proxy_ip, o.proxy_port);
 
             if (rc) {
 #ifdef MIND_DEBUG
-            std::cerr << "Error connecting to proxy" << std::endl;
+                std::cerr << "Error connecting to proxy" << std::endl;
 #endif
-              log.writeToLog(1, "Error connecting to proxy");
-             return; // if we can't connect to the proxy, there is no point
-             // in continuing
+                log.writeToLog(1, "Error connecting to proxy");
+                return; // if we can't connect to the proxy, there is no point
+                // in continuing
             }
         }
 
@@ -405,61 +404,62 @@ void ConnectionHandler::handleConnection(Socket &peerconn, String &ip) {
         bool persist;
         bool firsttime = true;
 
-        if (o.filterworkmode == 0)
-        {
+        if (o.filterworkmode == 0) {
             if (!o.transparentProxy)
-                persist=false;
-            char* errorCode=NULL;
+                persist = false;
+            char* errorCode = NULL;
             rc = proxysock.directConnect(header.getHost().c_str(), header.port, &errorCode);
-            if (rc)
-            {
-                char httpError[4096];
-                if (errorCode) {
-                    snprintf(httpError, 4095,
-                            "<HTML><HEAD><TITLE>%s</TITLE></HEAD><BODY>"
-                            "<H1>while trying to reach site:%s</H1><br>"
-                            "The following error has occurs when trying to connect: %s"
-                            "</BODY></HTML>\n\n"
-                            , errorCode
-                            , header.getHost().c_str()
-                            , errorCode
-                            );
-                } else {
-                    snprintf(httpError, 4095,
-                            "<HTML><HEAD><TITLE>Unknown error</TITLE></HEAD><BODY>"
-                            "<H1>Unknown error while trying to reach site: %s"
-                            "</BODY></HTML>\n\n"
-                            , header.getHost().c_str());
-                }
-
+            if (rc) {
                 peerconn.writeString("HTTP/1.1 503 Service Unavailable\n");
                 peerconn.writeString("Server: ");
                 peerconn.writeString(header.getHost().c_str());
                 peerconn.writeString("\n");
-                peerconn.writeString("Content-Length:");
-                peerconn.writeString(String(strlen(httpError)).c_str());
-                peerconn.writeString("\n");
                 peerconn.writeString("Content-Type: text/html\n\n");
-                peerconn.writeString(httpError);
-        /*
-                if (errorCode) {
-                    peerconn.writeString("<HTML><HEAD><TITLE>");
+
+                peerconn.writeString("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN"
+                        "\"><HTML><HEAD><TITLE>Error Message</TITLE><META http-equiv=Content-Type content="
+                        "\"text/html; charset=UTF-8\"><STYLE id=L_11004_1>A {FONT-WEIGHT: bold; FONT-SIZE:"
+                        "10pt; COLOR: #005a80; FONT-FAMILY: tahoma}A:hover {FONT-WEIGHT: bold; FONT-SIZE:"
+                        "10pt; COLOR: #0d3372; FONT-FAMILY: tahoma}TD {FONT-SIZE: 8pt; FONT-FAMILY: tahoma}"
+                        "TD.titleBorder {BORDER-RIGHT: #955319 1px solid; BORDER-TOP: #955319 1px solid;"
+                        "PADDING-LEFT: 8px; FONT-WEIGHT: bold; FONT-SIZE: 12pt; VERTICAL-ALIGN: middle;"
+                        "BORDER-LEFT: #955319 0px solid; COLOR: #955319; BORDER-BOTTOM: #955319 1px solid;"
+                        "FONT-FAMILY: tahoma; HEIGHT: 35px; BACKGROUND-COLOR: #d2b87a; TEXT-ALIGN: left}TD.titleBorder_x"
+                        "{BORDER-RIGHT: #955319 0px solid; BORDER-TOP: #955319 1px solid; PADDING-LEFT: 8px; FONT-WEIGHT:"
+                        "bold; FONT-SIZE: 12pt; VERTICAL-ALIGN: middle; BORDER-LEFT: #955319 1px solid; COLOR: #978c79;"
+                        "BORDER-BOTTOM: #955319 1px solid; FONT-FAMILY: tahoma; HEIGHT: 35px; BACKGROUND-COLOR: #d2b87a;"
+                        "TEXT-ALIGN: left}.TitleDescription {FONT-WEIGHT: bold; FONT-SIZE: 12pt; COLOR: black; FONT-FAMILY:"
+                        "tahoma}SPAN.explain {FONT-WEIGHT: normal; FONT-SIZE: 10pt; COLOR: #934225}SPAN.TryThings {FONT-WEIGHT:"
+                        "normal; FONT-SIZE: 10pt; COLOR: #934225}.TryList {MARGIN-TOP: 5px; FONT-WEIGHT: normal; FONT-SIZE: 8pt;"
+                        "COLOR: black; FONT-FAMILY: tahoma}.X {BORDER-RIGHT: #955319 1px solid; BORDER-TOP: #955319 1px solid;"
+                        "FONT-WEIGHT: normal; FONT-SIZE: 12pt; BORDER-LEFT: #955319 1px solid; COLOR: #7b3807;"
+                        "BORDER-BOTTOM: #955319 1px solid; FONT-FAMILY: verdana;"
+                        "BACKGROUND-COLOR: #d1c2b4}.adminList {MARGIN-TOP: 2px}</STYLE>"
+                        "<META content=\"MSHTML 6.00.2800.1170\" name=GENERATOR></HEAD>"
+                        "<BODY bgColor=#f3f3ed><TABLE cellSpacing=0 cellPadding=0 width=\"100%\">"
+                        "<TBODY><TR><TD class=titleborder_x width=30><TABLE height=25 "
+                        "cellSpacing=2 cellPadding=0 width=25 bgColor=black><TBODY><TR>"
+                        "<TD class=x vAlign=center align=middle>X</TD></TR></TBODY></TABLE>"
+                        "</TD><TD class=titleBorder id=L_11004_2>Network Access Message:"
+                        "<SPAN class=TitleDescription> ");
+                if (!errorCode)
+                    peerconn.writeString("Unknown error");
+                else
                     peerconn.writeString(errorCode);
-                    peerconn.writeString("</TITLE></HEAD><BODY>");
-                    peerconn.writeString("<H1>while trying to reach site: ");
-                    peerconn.writeString(header.getHost().c_str());
-                    peerconn.writeString("</H1><br>");
-                    peerconn.writeString("The following error has occurs when trying to connect: ");
-                    peerconn.writeString(errorCode);
-                    peerconn.writeString("</BODY></HTML>\n\n");
-                    free (errorCode);
-                } else {
-                    peerconn.writeString("<HTML><HEAD><TITLE>Unknown error</TITLE></HEAD><BODY>");
-                    peerconn.writeString("<H1>Unknown error while trying to reach site: ");
-                    peerconn.writeString(header.getHost().c_str());
-                    peerconn.writeString("</BODY></HTML>\n\n");
-                }
-         */
+
+                peerconn.writeString("</SPAN></TD></TR></TBODY></TABLE><TABLE id=spacer>"
+                        "<TBODY><TR><TD height=10></TD></TR></TBODY></TABLE><TABLE width=400>"
+                        "<TBODY><TR><TD noWrap width=25></TD><TD width=400><SPAN class=explain>"
+                        "<B><SPAN class=tryThings><ID id=L_11004_5><B>Try the following:"
+                        "</B></ID></SPAN></B> <UL class=TryList><LI id=L_11004_6><B>Refresh page:</B>"
+                        "Search for the page again by clicking the Refresh button."
+                        "The timeout may have occurred due to Internet congestion."
+                        "<LI id=L_11004_7><B>Check spelling:</B> Check that you typed the Web page address correctly. "
+                        "The address may have been mistyped.<LI id=L_11004_8><B>Access from a link:</B> "
+                        "If there is a link to the page you are looking for, try accessing the page from that link.</UL><ID id=L_11004_9>"
+                        "If you are still not able to view the requested page, try contacting your network administrator."
+                        "</ID> <BR><BR></TD></TR></TBODY></TABLE><TABLE id=spacer><TBODY><TR><TD height=15></TD></TR></TBODY>"
+                        "</TABLE></BODY></HTML>");
                 proxysock.close();
                 return;
             }
