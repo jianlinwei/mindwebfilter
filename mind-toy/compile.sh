@@ -1,9 +1,4 @@
 #!/bin/bash
-if [ "$USER" != "root" ]
-then
-  echo "This script must be executed as root"
-  exit 1
-fi
 
 if [ $# -ne 2 ]
 then
@@ -12,8 +7,7 @@ then
   exit 2
 fi
 
-make distclean
-./autogen.sh&&./configure --mandir=/usr/share/man/ --enable-clamd=yes --with-proxyuser=$1 \
+./bootstrap&&./configure --mandir=/usr/share/man/ --enable-clamd=yes --with-proxyuser=$1 \
 --with-proxygroup=$2 --prefix=/ --mandir=/usr/share/man \
 --infodir=/usr/share/info --sysconfdir=/etc --localstatedir=/var \
 --enable-icap=yes --enable-commandline=yes --enable-trickledm=yes --enable-email=yes \
