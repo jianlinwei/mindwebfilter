@@ -10,4 +10,4 @@ There is two branches of MinD, the MinD Toy version and the MinD Blaster vesion.
 
 Select which version of MinD do you want to read about:
   * [Toy] Version.
-  * Blaster Version.
+  * [Blaster] Version.
