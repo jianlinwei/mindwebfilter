@@ -5,7 +5,7 @@
 
 
 AC_PREREQ(2.57)
-AC_INIT(mind, 1.0)
+AC_INIT(mind, 1.1)
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([mind_config.h])
 
