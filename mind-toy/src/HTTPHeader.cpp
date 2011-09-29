@@ -92,7 +92,6 @@ void HTTPHeader::reset() {
 // *
 // *
 
-
 String HTTPHeader::requestType() {
     return header.front().before(" ");
 }
@@ -772,15 +771,13 @@ void HTTPHeader::modifyClientHeader(bool allowpersistent) {
             pport = &header.at(i);
         }
     }
-    
-    if (o.forceGoogleSafeSearch && (phost->startsWith("Host: www.google.") || phost->startsWith("Host: google.")))
-    {
+
+    if (o.forceGoogleSafeSearch && (phost->startsWith("Host: www.google.") || phost->startsWith("Host: google."))) {
         if (header.front().after("//").after("/").startsWith("search?")
                 || header.front().after("//").after("/").startsWith("images?")
                 || header.front().after("/").startsWith("search?")
-                || header.front().after("/").startsWith("images?"))
-        {
-           header.front() = header.front().before(" HTTP/1.0")+"&safe=on HTTP/1.0";
+                || header.front().after("/").startsWith("images?")) {
+            header.front() = header.front().before(" HTTP/1.0") + "&safe=on HTTP/1.0";
         }
 
     }
@@ -847,8 +844,7 @@ void HTTPHeader::modifyHeaders(bool allowpersistent) {
 
     if (header.at(0).c_str()[0] == 'H' && header.at(0).c_str()[1] == 'T') {
         modifyServerHeader(allowpersistent);
-    }
-    else {
+    } else {
         // Inherited from Dansguardian:
         // Do not allow persistent connections on CONNECT requests the browser
         // thinks it has a tunnel directly to the external server,
@@ -858,8 +854,7 @@ void HTTPHeader::modifyHeaders(bool allowpersistent) {
         if (header.at(0).c_str()[0] == 'C') { // CONNECT
             allowpersistent = false;
             modifyClientHeader(false);
-        }
-        else
+        } else
             modifyClientHeader(allowpersistent);
     }
 
@@ -953,7 +948,7 @@ String HTTPHeader::url(bool withport) {
             }
             // Chained proxies need requests in "Proxy" format.
             if (o.filterworkmode == 1)
-              header.front() = requestType() + " " + answer + " HTTP/" + header.front().after(" HTTP/");
+                header.front() = requestType() + " " + answer + " HTTP/" + header.front().after(" HTTP/");
         } else { // must be in the form GET http://foo.bar:80/ HTML/1.0
             if (!answer.after("://").contains("/")) {
                 answer += "/"; // needed later on so correct host is extracted
@@ -1405,7 +1400,14 @@ void HTTPHeader::out(Socket * peersock, Socket * sock, int sendflag, bool reconn
 
     if (sendflag == __MIND_HEADER_SENDALL || sendflag == __MIND_HEADER_SENDFIRSTLINE) {
         if (header.size() > 0) {
-            l = header.front() + "\r\n";
+            l = header.front();
+            if (!(l.endsWith("\r") || l.endsWith("\n"))) {
+                l += "\r\n";
+            } else {
+                if (l.endsWith("\r")) {
+                    l += "\n";
+                }
+            }
 #ifdef MIND_DEBUG
             std::cout << "headertoclient:" << l << std::endl;
 #endif
