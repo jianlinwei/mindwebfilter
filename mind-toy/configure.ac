@@ -745,4 +745,4 @@ AC_CONFIG_FILES([Makefile
 
 AC_OUTPUT
 
-ln -s --force /usr/bin/libtool .
+ln -s --force `command -v libtool` .
