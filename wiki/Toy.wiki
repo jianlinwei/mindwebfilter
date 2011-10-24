@@ -4,6 +4,7 @@
 
 == Contents ==
 
-  * [ToyCompile How to compile the Toy Version].
+  * [Compiling_Toy_in_Debian How to compile the Toy Version under Debian GNU/Linux based systems].
+  * [Compiling_Toy_in_FreeBSD How to compile the Toy Version under FreeBSD].
   * [BlasterCompile How to compile the Blaster Version].
   * [ToyConfiguation Configuration keys for Toy version].
