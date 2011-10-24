@@ -14,7 +14,7 @@ svn checkout http://mindwebfilter.googlecode.com/svn/trunk/ mindwebfilter-read-o
 
 ==Dependencies==
 
-For compiling Toy under Debian or Ubuntu, you will need the following packages installed before executing the _configure_ command:
+For compiling Toy under Debian based distributions, you will need the following packages installed before executing the _configure_ command:
   * automake
   * pkg-config
   * build-essential
