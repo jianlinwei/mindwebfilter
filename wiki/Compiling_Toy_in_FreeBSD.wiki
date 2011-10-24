@@ -11,7 +11,7 @@ For compiling Toy under FreeBSD, you will need the following packages installed 
   * clamav
   * libiconv
   * iconv
-  * subversion (optional, for svn checkout)
+  * subversion (for svn checkout)
 
 
 ==Download==
