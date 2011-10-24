@@ -3,7 +3,7 @@
 
 ==Download==
 
-We already provide packages for the stable Debian distribution [downloads/list here]. If you need to compile MinD, get the stable source code snapshot from [downloads/list here].
+We already provide packages for the stable Debian distribution [http://code.google.com/p/mindwebfilter/downloads/list here]. If you need to compile MinD, get the stable source code snapshot from [http://code.google.com/p/mindwebfilter/downloads/list here].
 
 You can also grab the latest testing code from the Google Code repository (must have the package subversion installed):
 
