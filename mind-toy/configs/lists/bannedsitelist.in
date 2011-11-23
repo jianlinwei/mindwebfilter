@@ -4,8 +4,7 @@
 #The bannedurllist is for blocking PART of a site
 #The bannedsitelist is for blocking ALL of a site
 
-#As of MinD 2.7.3 you can now include
-#.tld so for example you can match .gov for example
+#You can include .tld so you can match .gov for example.
 
 #The 'grey' lists override the 'banned' lists.
 #The 'exception' lists override the 'banned' lists also.
@@ -46,7 +45,7 @@ badboys.com
 #the # from the next line to leave only a '**':
 #**
 
-#Blanket SSL/CONNECT Block.  To block all SSL 
+#Blanket SSL/CONNECT Block.  To block all SSL
 #and CONNECT tunnels except to addresses in the
 #exceptionsitelist and greysitelist files, remove
 #the # from the next line to leave only a '**s':
