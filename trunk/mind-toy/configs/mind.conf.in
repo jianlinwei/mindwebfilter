@@ -1,8 +1,8 @@
 # MinD config file for version @PACKAGE_VERSION@
 
-# **NOTE** as MinD Toy Version is a fork of Dansguardian version 2.10.1.1 
-# this file is compatible with the dansguardian.conf 
-# Please keep in mind that MinD has some new keys and some DG keys are 
+# **NOTE** as MinD Toy Version is a fork of Dansguardian version 2.10.1.1
+# this file is compatible with the dansguardian.conf
+# Please keep in mind that MinD has some new keys and some DG keys are
 # obsolete for MinD.
 
 # Directory for locating logs
@@ -10,7 +10,7 @@
 # loglocation = /var/log/mind
 
 # Internal Log file by message type.
-# 
+#
 # Internal MinD log (mind.log):
 # INFO:      1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 1
 # WARNING:   2  0 0 0 0  0 0 0 0  0 0 0 0  0 0 1 0
@@ -29,7 +29,7 @@
 #       MinD has done several things, So if an error occurs while
 #       loading it's possible to see some messages at syslog or
 #       stderr even when you don't have configured this option.
-# Important: 0 value will be ignored, use 512 value to blank 
+# Important: 0 value will be ignored, use 512 value to blank
 #            all bits (Silent mode).
 internallogfilemask=7
 
@@ -41,7 +41,7 @@ accesslogfielseparator = \t
 
 
 # Access Log Line Ending character.
-# String for ending access log lines. it supports C stile characters like \t, \n, etc. 
+# String for ending access log lines. it supports C stile characters like \t, \n, etc.
 # Default value: \n
 accesslogendline = \n
 
@@ -71,7 +71,7 @@ accesslogendline = \n
 # UrlModified       1048576  0 0 0 1  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
 # HeaderModified    2097152  0 0 1 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
 # BlockeableContent 4194304  0 1 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0  0 0 0 0
-# 
+#
 # Default value: 8388575 (All but user-agent)
 # NOTE: 0 or missing key will be configure the default value.
 accesslogfieldmask = 8388575
@@ -94,11 +94,11 @@ filterworkmode = 0
 
 
 # Blocking Page Style
-# 0 - Dansguardian Standard Placeholders Style 
+# 0 - Dansguardian Standard Placeholders Style
 #     (like -URL-, -REASONGIVEN-, etc.)
-# 1 - Dansguardian Commented Placeholders Style 
+# 1 - Dansguardian Commented Placeholders Style
 #     (like <!--URL-->, <!--REASONGIVEN-->, etc.)
-# 2 - OOP Placeholders Style 
+# 2 - OOP Placeholders Style
 #     (like mind.siteURL(), mind.reasonGiven(), etc.)
 # Default: 0 (Mind Style).
 #
@@ -162,7 +162,7 @@ logexceptionhits = 2
 
 
 # Network Settings
-# 
+#
 # the IP that MinD listens on.  If left blank MinD will
 # listen on all IPs.  That would include all NICs, loopback, modem, etc.
 # Normally you would have your firewall protecting this, but if you want
@@ -317,8 +317,8 @@ phrasefiltermode = 2
 # Lower casing options
 # When a document is scanned the uppercase letters are converted to lower case
 # in order to compare them with the phrases.  However this can break Big5 and
-# other 16-bit texts.  If needed preserve the case.  As of version 2.7.0 accented
-# characters are supported.
+# other 16-bit texts.  If needed preserve the case.  Accented characters are
+# supported.
 # 0 = force lower case (default)
 # 1 = do not change case
 # 2 = scan first in lower case, then in original case
@@ -367,7 +367,7 @@ reverseaddresslookups = off
 # If a client computer is matched against an IP given in the lists, then the
 # IP will be recorded in any log entries; if forward DNS is successful and a
 # match occurs against a hostname, the hostname will be logged instead.
-# It will reduce searching speed somewhat so unless you have a local DNS server, 
+# It will reduce searching speed somewhat so unless you have a local DNS server,
 # leave it off.
 reverseclientiplookups = off
 
@@ -634,7 +634,7 @@ maxsparechildren = 64
 
 # sets the maximum age of a child process before it croaks it.
 # This is the number of connections they handle before exiting.
-# On all servers you might want to use 1000. 
+# On all servers you might want to use 1000.
 # We recomend do not modify this value.
 maxagechildren = 1000
 
@@ -651,12 +651,12 @@ maxips = 0
 # Remember to edit the log file path above also if that is your intention.
 
 # IPC filename
-# 
+#
 # Defines IPC server directory and filename used to communicate with the log process.
 ipcfilename = '/tmp/.mindipc'
 
 # URL list IPC filename
-# 
+#
 # Defines URL list IPC server directory and filename used to communicate with the URL
 # cache process.
 urlipcfilename = '/tmp/.mindurlipc'
@@ -668,7 +668,7 @@ urlipcfilename = '/tmp/.mindurlipc'
 ipipcfilename = '/tmp/.mindipipc'
 
 # PID filename
-# 
+#
 # Defines process id directory and filename.
 #pidfilename = '@DGPIDDIR@/mind.pid'
 
