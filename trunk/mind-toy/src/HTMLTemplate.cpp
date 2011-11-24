@@ -1,9 +1,7 @@
 //Implements the HTMLTemplate class, for displaying template-based banned pages to clients
 
-//Please refer to http://dansguardian.org/?page=copyright
-//for the license for this code.
 //Written by Daniel Barron (daniel@//jadeb.com).
-//For support go to http://groups.yahoo.com/group/dansguardian
+//Modified by MinD Team on 2011.
 
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -193,6 +191,22 @@ bool HTMLTemplate::readTemplateFile(const char *filename) {
 
 void HTMLTemplate::display(Socket *s, String *url, std::string &reason, std::string &logreason, std::string &categories,
         std::string *user, std::string *ip, std::string *host, int filtergroup, String & hashed) {
+
+    if (reason == "Banned site: googlesyndication.com" || reason == "Banned site: googleadservices.com")
+    {
+        std::string redirection;
+        std::size_t url_pos;
+        redirection="<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>Moved</TITLE><meta http-equiv=\"refresh\" content=\"0;url=";
+        url_pos = url->rfind("adurl=");
+        if (url_pos!=std::string::npos) {
+          url_pos += 6;
+          redirection.append(url->substr(url_pos, url->length() - url_pos));
+          redirection.append("\"></HEAD></HTML>\n");
+          (*s).writeString(redirection.c_str());
+          return;
+       }
+    }
+
 #ifdef MIND_DEBUG
     std::cout << "Displaying TEMPLATE" << std::endl;
 #endif
