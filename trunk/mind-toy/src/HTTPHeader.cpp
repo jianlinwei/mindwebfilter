@@ -777,7 +777,6 @@ void HTTPHeader::modifyClientHeader(bool allowpersistent) {
             || phost->startsWith("Host: images.google."))) {
         if (header.front().after("//").after("/").startsWith("search?")
                 || header.front().after("//").after("/").startsWith("images?")
-                || header.front().after("//").after("/").startsWith("images?")
                 || header.front().after("//").after("/").startsWith("m?")
                 || header.front().after("//").after("/").startsWith("m/")
                 || header.front().after("/").startsWith("search?")
